@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.nutee.dto.Board;
+import kr.nutee.exception.NonExistException;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -35,6 +36,11 @@ public class BoardServiceTest {
 		Board board = boardService.findOne(1);
 		assertEquals(board.getId(), 1);
 		System.out.println(board.toString());
+	}
+
+	@Test(expected=NonExistException.class)
+	public void 존재하지않는게시판() {
+		boardService.findOne(8);
 	}
 
 }
