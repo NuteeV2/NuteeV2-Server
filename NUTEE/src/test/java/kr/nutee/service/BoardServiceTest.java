@@ -30,4 +30,11 @@ public class BoardServiceTest {
 		}
 	}
 
+	@Test
+	public void 게시판하나출력() {
+		Board board = boardService.findOne(1);
+		assertEquals(board.getId(), 1);
+		System.out.println(board.toString());
+	}
+
 }

@@ -7,6 +7,10 @@
   <select id="findAll" resultType="Board">
     SELECT * FROM Board ORDER BY id
   </select>
+  
+  <select id="findOne" resultType="Board">
+    SELECT * FROM Board WHERE id = #{id}
+  </select>
 
 </mapper>
 
