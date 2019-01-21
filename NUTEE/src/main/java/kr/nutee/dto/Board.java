@@ -1,8 +1,8 @@
 package kr.nutee.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /*
@@ -11,7 +11,7 @@ import lombok.ToString;
  * @author choiyk
  */
 @Getter
-@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 public class Board {
