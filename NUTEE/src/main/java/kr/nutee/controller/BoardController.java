@@ -64,7 +64,7 @@ public class BoardController {
 	@GetMapping("{id}")
 	public ResponseEntity<Board> board(@PathVariable("id") int id) {
 		Board board = boardService.findOne(id);
-		if(board == null) throw new BadRequestException("NonExist Board id "+id);
+		if(board == null) throw new BadRequestException("NonExist Board id :"+id);
 		return new ResponseEntity<Board>(board, HttpStatus.OK);
 	}
 
