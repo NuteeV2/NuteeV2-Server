@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import kr.nutee.dto.Board;
+import kr.nutee.exception.InvalidDataException;
 import kr.nutee.model.BoardInsertRequestDto;
 import kr.nutee.repository.mapper.BoardMapper;
 import kr.nutee.service.impl.BoardServiceImpl;
@@ -62,7 +63,7 @@ public class BoardServiceTest {
 	}
 
 	@Test
-	public void 게시판삽입성공() {
+	public void 게시판삽입성공() throws InvalidDataException {
 		BoardInsertRequestDto boardDto = new BoardInsertRequestDto();
 		boardDto.setBoardName("게시판 삽입 테스트");
 		boardService.insert(boardDto);
