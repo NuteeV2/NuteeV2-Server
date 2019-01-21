@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.nutee.dto.Board;
+import kr.nutee.model.BoardInsertRequestDto;
 import kr.nutee.repository.mapper.BoardMapper;
 import kr.nutee.service.BoardService;
 
@@ -41,7 +42,7 @@ public class BoardServiceImpl implements BoardService{
 	 * @param 게시판 id, 게시판 이름
 	 */
 	@Override
-	public void insert(Board board) {
+	public void insert(BoardInsertRequestDto board) {
 		boardMapper.insert(board);
 	}
 

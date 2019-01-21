@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.nutee.dto.Board;
+import kr.nutee.model.BoardInsertRequestDto;
 
 /*
  * Board Mapper Interface
@@ -20,7 +21,7 @@ public interface BoardMapper {
 	Board findOne(int id);
 
 	//게시판 추가
-	void insert(Board board);
+	void insert(BoardInsertRequestDto board);
 
 	//게시판 삭제
 	void delete(int id);
