@@ -11,6 +11,21 @@
   <select id="findOne" resultType="Board">
     SELECT * FROM Board WHERE id = #{id}
   </select>
+  
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+  	INSERT Board (boardName)
+  	VALUES (#{boardName})
+  </insert>
+  
+  <update id="update">
+  	UPDATE Board
+  	SET boardName=#{boadName}
+  	WHERE id=#{id}
+  </update>
+  
+  <delete id="delete">
+  	DELETE FROM Board WHERE id=#{id}
+  </delete>
 
 </mapper>
 

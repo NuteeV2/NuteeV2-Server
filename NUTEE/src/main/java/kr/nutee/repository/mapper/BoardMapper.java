@@ -19,4 +19,13 @@ public interface BoardMapper {
 	//해당 id에 해당하는 게시판 조회
 	Board findOne(int id);
 
+	//게시판 추가
+	void insert(Board board);
+
+	//게시판 삭제
+	void delete(int id);
+
+	//게시판 이름 변경
+	void update(Board board);
+
 }

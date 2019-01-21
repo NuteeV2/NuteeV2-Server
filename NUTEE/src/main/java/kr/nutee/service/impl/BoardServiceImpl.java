@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.nutee.dto.Board;
-import kr.nutee.exception.NonExistException;
 import kr.nutee.repository.mapper.BoardMapper;
 import kr.nutee.service.BoardService;
 
@@ -35,8 +34,26 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Board findOne(int id) {
 		Board board = boardMapper.findOne(id);
-		if(board == null) throw new NonExistException("NonExist Board id "+id);
 		return board;
+	}
+
+	/*
+	 * @param 게시판 id, 게시판 이름
+	 */
+	@Override
+	public void insert(Board board) {
+		boardMapper.insert(board);
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void update(Board board) {
+		boardMapper.update(board);
 	}
 
 }
