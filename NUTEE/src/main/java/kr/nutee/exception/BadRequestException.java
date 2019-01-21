@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "BadRequest")
 public class BadRequestException extends RuntimeException{
 
+	private static final long serialVersionUID = 1L;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public BadRequestException(String message) {
