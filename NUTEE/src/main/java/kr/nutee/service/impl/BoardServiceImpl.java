@@ -1,11 +1,17 @@
 package kr.nutee.service.impl;
 
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.nutee.dto.Board;
+import kr.nutee.exception.InvalidDataException;
 import kr.nutee.model.BoardInsertRequestDto;
 import kr.nutee.repository.mapper.BoardMapper;
 import kr.nutee.service.BoardService;
@@ -19,6 +25,8 @@ public class BoardServiceImpl implements BoardService{
 
 	@Autowired
 	private BoardMapper boardMapper;
+
+	private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
 	/*
 	 * @return 전체 게시판 목록
@@ -42,8 +50,14 @@ public class BoardServiceImpl implements BoardService{
 	 * @param 게시판 id, 게시판 이름
 	 */
 	@Override
-	public void insert(BoardInsertRequestDto board) {
-		boardMapper.insert(board);
+	public void insert(BoardInsertRequestDto board) throws InvalidDataException{
+		Set<ConstraintViolation<BoardInsertRequestDto>> validateErrors = validator.validate(board);
+		if(validateErrors.isEmpty()) {
+			boardMapper.insert(board);
+		}
+		else{
+			throw new InvalidDataException(validateErrors.toString());
+		}
 	}
 
 	@Override

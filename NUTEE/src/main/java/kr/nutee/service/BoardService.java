@@ -3,6 +3,7 @@ package kr.nutee.service;
 import java.util.List;
 
 import kr.nutee.dto.Board;
+import kr.nutee.exception.InvalidDataException;
 import kr.nutee.model.BoardInsertRequestDto;
 
 /*
@@ -19,7 +20,7 @@ public interface BoardService {
 	public abstract Board findOne(int id);
 
 	//게시판 추가
-	public abstract void insert(BoardInsertRequestDto board);
+	public abstract void insert(BoardInsertRequestDto board) throws InvalidDataException;
 
 	//게시판 삭제
 	public abstract void delete(int id);

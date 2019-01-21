@@ -1,11 +1,6 @@
 package kr.nutee.controller;
 
 import java.util.List;
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.nutee.dto.Board;
 import kr.nutee.exception.BadRequestException;
+import kr.nutee.exception.InvalidDataException;
 import kr.nutee.model.BoardInsertRequestDto;
 import kr.nutee.service.impl.BoardServiceImpl;
 
@@ -35,7 +31,6 @@ import kr.nutee.service.impl.BoardServiceImpl;
 public class BoardController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
 	private final BoardServiceImpl boardService;
 
@@ -76,20 +71,15 @@ public class BoardController {
 	 */
 	@PostMapping("")
 	public ResponseEntity<String> insert(@RequestBody BoardInsertRequestDto board){
-		Set<ConstraintViolation<BoardInsertRequestDto>> validateErrors = validator.validate(board);
-		if(validateErrors.isEmpty()) {
-			try{
-				boardService.insert(board);
-				return new ResponseEntity<String>("", HttpStatus.OK);
-			}
-			catch(DataIntegrityViolationException e) {
-				logger.info("DataIntegrityViolationException: 게시판 중복 오류");
-				return new ResponseEntity<String>("게시판 이름 중복 오류", HttpStatus.CONFLICT);
-			}
+		try{
+			boardService.insert(board);
+			return new ResponseEntity<String>("", HttpStatus.OK);
 		}
-		else {
-			logger.info("DataIntegrityViolationException: 게시판 이름 조건 오류");
-			return new ResponseEntity<String>(validateErrors.toString(), HttpStatus.CONFLICT);
+		catch(DataIntegrityViolationException e) {	//DB 삽입 시 게시판 이름 중복
+			logger.info("DataIntegrityViolationException: 게시판 이름 중복 오류");
+			return new ResponseEntity<String>("게시판 이름 중복 오류", HttpStatus.CONFLICT);
+		}catch(InvalidDataException e){	//데이터 유효성 검사 시 오류
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
 		}
 	}
 
