@@ -19,7 +19,7 @@
   
   <update id="update">
   	UPDATE Board
-  	SET boardName=#{boadName}
+  	SET boardName=#{board.boardName}
   	WHERE id=#{id}
   </update>
   
