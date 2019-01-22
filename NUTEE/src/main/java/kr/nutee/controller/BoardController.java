@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.nutee.model.BoardInsertRequestDto;
+import kr.nutee.model.BoardInsertAndUpdateRequestDto;
 import kr.nutee.model.CustomResponseBody;
 import kr.nutee.service.impl.BoardServiceImpl;
 
@@ -68,8 +69,21 @@ public class BoardController {
 	 * @return 결과 상태 코드
 	 */
 	@PostMapping("")
-	public ResponseEntity<CustomResponseBody> insert(@Valid @RequestBody BoardInsertRequestDto board){
+	public ResponseEntity<CustomResponseBody> insert(@Valid @RequestBody BoardInsertAndUpdateRequestDto board){
 		boardService.insert(board);
+		CustomResponseBody body = new CustomResponseBody(null);
+		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+	}
+
+	/*
+	 * 게시판 이름 수정
+	 *
+	 * @param json형태의 board
+	 * @return 결과 상태 코드
+	 */
+	@PatchMapping("{id}")
+	public ResponseEntity<CustomResponseBody> update(@PathVariable("id") int id, @Valid @RequestBody BoardInsertAndUpdateRequestDto board){
+		boardService.update(id, board);
 		CustomResponseBody body = new CustomResponseBody(null);
 		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
