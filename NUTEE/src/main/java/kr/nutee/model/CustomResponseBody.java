@@ -16,10 +16,10 @@ import lombok.ToString;
  */
 @Getter
 @ToString
-public class ResponseBody {
+public class CustomResponseBody {
 
 	private Date timestamp;
-	private HttpStatus status;
+	private int status;
 	private Error error;
 	private Object data;
 
@@ -35,9 +35,9 @@ public class ResponseBody {
 	 * 응답 성공 시 사용
 	 * @param 현재 시간, return 할 data
 	 */
-	public ResponseBody(Date timestamp, Object data) {
-		this.timestamp = timestamp;
-		this.status = HttpStatus.OK;
+	public CustomResponseBody(Object data) {
+		this.timestamp = new Date();
+		this.status = HttpStatus.OK.value();
 		this.error = null;
 		this.data = data;
 	}
@@ -46,9 +46,9 @@ public class ResponseBody {
 	 * 응답 에러 발생 시 사용
 	 * @param 현재 시간, 상태 코드, 에러 메세지
 	 */
-	public ResponseBody(Date timestamp, HttpStatus status, String errorMessage){
-		this.timestamp = timestamp;
-		this.status = status;
+	public CustomResponseBody(HttpStatus status, String errorMessage){
+		this.timestamp = new Date();
+		this.status = status.value();
 		this.error = new Error(status.getReasonPhrase(), errorMessage);
 		this.data = null;
 	}
