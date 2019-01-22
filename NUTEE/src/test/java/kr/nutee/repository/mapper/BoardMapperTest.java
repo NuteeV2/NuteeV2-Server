@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.nutee.dto.Board;
-import kr.nutee.model.BoardInsertRequestDto;
+import kr.nutee.model.BoardInsertAndUpdateRequestDto;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -35,7 +35,7 @@ public class BoardMapperTest {
 
 	@Test
 	public void 게시판추가() {
-		BoardInsertRequestDto board = new BoardInsertRequestDto();
+		BoardInsertAndUpdateRequestDto board = new BoardInsertAndUpdateRequestDto();
 		board.setBoardName("테스트 게시판 2");
 		boardMapper.insert(board);
 
