@@ -1,6 +1,6 @@
 package kr.nutee.controller;
 
-import java.util.List;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.nutee.dto.Board;
 import kr.nutee.model.BoardInsertRequestDto;
+import kr.nutee.model.CustomResponseBody;
 import kr.nutee.service.impl.BoardServiceImpl;
 
 /*
@@ -44,8 +44,9 @@ public class BoardController {
 	 * @see /api/boards
 	 */
 	@GetMapping("")
-	public ResponseEntity<List<Board>> boards(){
-		return new ResponseEntity<List<Board>>(boardService.findAll(), HttpStatus.OK);
+	public ResponseEntity<CustomResponseBody> boards(){
+		CustomResponseBody body = new CustomResponseBody(boardService.findAll());
+		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
 	/*
@@ -55,9 +56,9 @@ public class BoardController {
 	 * @see /api/boards/{id}
 	 */
 	@GetMapping("{id}")
-	public ResponseEntity<Board> board(@PathVariable("id") int id) {
-		Board board = boardService.findOne(id);
-		return new ResponseEntity<Board>(board, HttpStatus.OK);
+	public ResponseEntity<CustomResponseBody> board(@PathVariable("id") int id) {
+		CustomResponseBody body = new CustomResponseBody(boardService.findOne(id));
+		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
 	/*
@@ -67,18 +68,10 @@ public class BoardController {
 	 * @return 결과 상태 코드
 	 */
 	@PostMapping("")
-	public ResponseEntity<String> insert(@RequestBody BoardInsertRequestDto board){
-		/*try{
-			boardService.insert(board);
-			return new ResponseEntity<String>("", HttpStatus.OK);
-		}
-		catch(DataIntegrityViolationException e) {	//DB 삽입 시 게시판 이름 중복
-			logger.info("DataIntegrityViolationException: 게시판 이름 중복 오류");
-			return new ResponseEntity<String>("게시판 이름 중복 오류", HttpStatus.CONFLICT);
-		}catch(InvalidDataException e){	//데이터 유효성 검사 시 오류
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
-		}*/
-		return null;
+	public ResponseEntity<CustomResponseBody> insert(@Valid @RequestBody BoardInsertRequestDto board){
+		boardService.insert(board);
+		CustomResponseBody body = new CustomResponseBody(null);
+		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
 }
