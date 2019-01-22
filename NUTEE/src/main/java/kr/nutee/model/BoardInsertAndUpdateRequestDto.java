@@ -9,7 +9,7 @@ import lombok.Data;
  * @author choiyk
  */
 @Data
-public class BoardInsertRequestDto {
+public class BoardInsertAndUpdateRequestDto {
 
 	@NotBlank(message="BoardName requires non blank value")
 	private String boardName;

@@ -3,7 +3,7 @@ package kr.nutee.service;
 import java.util.List;
 
 import kr.nutee.dto.Board;
-import kr.nutee.model.BoardInsertRequestDto;
+import kr.nutee.model.BoardInsertAndUpdateRequestDto;
 
 /*
  * Board Service Interface
@@ -19,12 +19,12 @@ public interface BoardService {
 	public abstract Board findOne(int id);
 
 	//게시판 추가
-	public abstract void insert(BoardInsertRequestDto board);
+	public abstract void insert(BoardInsertAndUpdateRequestDto board);
 
 	//게시판 삭제
 	public abstract void delete(int id);
 
 	//게시판 이름 변경
-	public abstract void update(Board board);
+	public abstract void update(int id, BoardInsertAndUpdateRequestDto board);
 
 }

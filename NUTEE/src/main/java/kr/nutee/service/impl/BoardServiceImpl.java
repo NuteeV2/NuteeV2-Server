@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.nutee.dto.Board;
 import kr.nutee.exception.BadRequestException;
-import kr.nutee.model.BoardInsertRequestDto;
+import kr.nutee.model.BoardInsertAndUpdateRequestDto;
 import kr.nutee.repository.mapper.BoardMapper;
 import kr.nutee.service.BoardService;
 
@@ -41,22 +41,26 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	/*
-	 * @param 게시판 id, 게시판 이름
+	 * @param 게시판 이름
 	 */
 	@Override
-	public void insert(BoardInsertRequestDto board){
+	public void insert(BoardInsertAndUpdateRequestDto board){
 		boardMapper.insert(board);
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		// TODO delete 메소드 작성해야 함..
 
 	}
 
+	/*
+	 * @param 게시판 id, 게시판 이름
+	 */
 	@Override
-	public void update(Board board) {
-		boardMapper.update(board);
+	public void update(int id, BoardInsertAndUpdateRequestDto board) {
+		//TODO bad request 처리 해야하나..?
+		boardMapper.update(id, board);
 	}
 
 }

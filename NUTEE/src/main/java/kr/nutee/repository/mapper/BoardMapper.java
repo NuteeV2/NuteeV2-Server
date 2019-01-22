@@ -3,9 +3,10 @@ package kr.nutee.repository.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import kr.nutee.dto.Board;
-import kr.nutee.model.BoardInsertRequestDto;
+import kr.nutee.model.BoardInsertAndUpdateRequestDto;
 
 /*
  * Board Mapper Interface
@@ -21,12 +22,12 @@ public interface BoardMapper {
 	Board findOne(int id);
 
 	//게시판 추가
-	void insert(BoardInsertRequestDto board);
+	void insert(BoardInsertAndUpdateRequestDto board);
 
 	//게시판 삭제
 	void delete(int id);
 
 	//게시판 이름 변경
-	void update(Board board);
+	void update(@Param("id") int id, @Param("board") BoardInsertAndUpdateRequestDto board);
 
 }
