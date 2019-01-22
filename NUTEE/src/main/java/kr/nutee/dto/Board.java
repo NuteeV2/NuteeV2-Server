@@ -11,7 +11,7 @@ import lombok.ToString;
  * @author choiyk
  */
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor	//TODO @NoArgsconstructor 로 바꿀 것
 @ToString
 @EqualsAndHashCode
 public class Board {
