@@ -1,7 +1,6 @@
 package kr.nutee.model;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -12,8 +11,7 @@ import lombok.Data;
 @Data
 public class BoardInsertRequestDto {
 
-	@NotNull(message="BoardName requires valid value")
-	@NotEmpty(message="BoardName requires non empty value")
+	@NotBlank(message="BoardName requires non blank value")
 	private String boardName;
 
 }
