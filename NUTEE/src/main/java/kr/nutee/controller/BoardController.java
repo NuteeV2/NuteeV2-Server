@@ -46,7 +46,7 @@ public class BoardController {
 	 */
 	@GetMapping("")
 	public ResponseEntity<CustomResponseBody> boards(){
-		CustomResponseBody body = new CustomResponseBody(boardService.findAll());
+		CustomResponseBody body = new CustomResponseBody(HttpStatus.OK, boardService.findAll());
 		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
@@ -58,7 +58,7 @@ public class BoardController {
 	 */
 	@GetMapping("{id}")
 	public ResponseEntity<CustomResponseBody> board(@PathVariable("id") int id) {
-		CustomResponseBody body = new CustomResponseBody(boardService.findOne(id));
+		CustomResponseBody body = new CustomResponseBody(HttpStatus.OK, boardService.findOne(id));
 		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
@@ -71,8 +71,8 @@ public class BoardController {
 	@PostMapping("")
 	public ResponseEntity<CustomResponseBody> insert(@Valid @RequestBody BoardInsertAndUpdateRequestDto board){
 		boardService.insert(board);
-		CustomResponseBody body = new CustomResponseBody(null);
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+		CustomResponseBody body = new CustomResponseBody(HttpStatus.CREATED, null);
+		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.CREATED);
 	}
 
 	/*
@@ -84,8 +84,8 @@ public class BoardController {
 	@PatchMapping("{id}")
 	public ResponseEntity<CustomResponseBody> update(@PathVariable("id") int id, @Valid @RequestBody BoardInsertAndUpdateRequestDto board){
 		boardService.update(id, board);
-		CustomResponseBody body = new CustomResponseBody(null);
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+		CustomResponseBody body = new CustomResponseBody(HttpStatus.CREATED, null);
+		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.CREATED);
 	}
 
 }

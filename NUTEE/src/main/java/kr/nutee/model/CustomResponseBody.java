@@ -35,9 +35,9 @@ public class CustomResponseBody {
 	 * 응답 성공 시 사용
 	 * @param 현재 시간, return 할 data
 	 */
-	public CustomResponseBody(Object data) {
+	public CustomResponseBody(HttpStatus status, Object data) {
 		this.timestamp = new Date();
-		this.status = HttpStatus.OK.value();
+		this.status = status.value();
 		this.error = null;
 		this.data = data;
 	}
