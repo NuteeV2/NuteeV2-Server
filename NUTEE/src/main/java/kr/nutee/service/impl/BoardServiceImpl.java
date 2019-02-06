@@ -59,7 +59,7 @@ public class BoardServiceImpl implements BoardService{
 	 */
 	@Override
 	public void update(int id, BoardInsertAndUpdateRequestDto board) {
-		//TODO bad request 처리 해야하나..?
+		//TODO bad request 처리 해야하나..? 없는 id여도 update query는 성공 뜨고 디비엔 아무 변화도 없네
 		boardMapper.update(id, board);
 	}
 
