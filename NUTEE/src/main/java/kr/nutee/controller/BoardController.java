@@ -84,8 +84,8 @@ public class BoardController {
 	@PatchMapping("{id}")
 	public ResponseEntity<CustomResponseBody> update(@PathVariable("id") int id, @Valid @RequestBody BoardInsertAndUpdateRequestDto board){
 		boardService.update(id, board);
-		CustomResponseBody body = new CustomResponseBody(HttpStatus.CREATED, null);
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.CREATED);
+		CustomResponseBody body = new CustomResponseBody(HttpStatus.OK, null);
+		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
 }

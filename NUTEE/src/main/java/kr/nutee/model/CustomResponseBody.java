@@ -32,8 +32,19 @@ public class CustomResponseBody {
 	}
 
 	/*
+	 * 응답 성공 시 사용, return할 객체가 없는 경우
+	 * @param status code
+	 */
+	public CustomResponseBody(HttpStatus status) {
+		this.timestamp = new Date();
+		this.status = status.value();
+		this.error = null;
+		this.data = null;
+	}
+
+	/*
 	 * 응답 성공 시 사용
-	 * @param 현재 시간, return 할 data
+	 * @param status code, return 할 data
 	 */
 	public CustomResponseBody(HttpStatus status, Object data) {
 		this.timestamp = new Date();
@@ -44,7 +55,7 @@ public class CustomResponseBody {
 
 	/*
 	 * 응답 에러 발생 시 사용
-	 * @param 현재 시간, 상태 코드, 에러 메세지
+	 * @param 상태 코드, 에러 메세지
 	 */
 	public CustomResponseBody(HttpStatus status, String errorMessage){
 		this.timestamp = new Date();
