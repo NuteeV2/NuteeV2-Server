@@ -1,13 +1,15 @@
 package kr.nutee.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.nutee.dto.Category;
-import kr.nutee.model.CategoryInsertRequestDto;
-import kr.nutee.model.CategoryUpdateRequestDto;
+import kr.nutee.model.Category.CategoryInsertRequestDto;
+import kr.nutee.model.Category.CategoryListResponseDto;
+import kr.nutee.model.Category.CategoryUpdateRequestDto;
 import kr.nutee.repository.mapper.CategoryMapper;
 import kr.nutee.service.CategoryService;
 
@@ -26,8 +28,17 @@ public class CategoryServicecImpl implements CategoryService{
 	 * @return 해당 게시판의 카테고리, 없으면 null(게시판에 카테고리가 없을 수 있으므로 null 허용함)
 	 */
 	@Override
-	public List<Category> findAllByBoardId(int boardId) {
-		return categoryMapper.findAllByBoardId(boardId);
+	public List<CategoryListResponseDto> findAllByBoardId(int boardId) {
+		List<Category> categories = categoryMapper.findAllByBoardId(boardId);
+		if(categories == null) return null;	//TODO 리팩토링 필요
+		List<CategoryListResponseDto> list = new ArrayList<>();
+		for(Category c : categories) {
+			CategoryListResponseDto dto = new CategoryListResponseDto();
+			dto.setId(c.getId());
+			dto.setCategoryName(c.getCategoryName());
+			list.add(dto);
+		}
+		return list;
 	}
 
 	/*
