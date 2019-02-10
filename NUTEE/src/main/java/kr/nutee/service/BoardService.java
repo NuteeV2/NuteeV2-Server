@@ -3,7 +3,7 @@ package kr.nutee.service;
 import java.util.List;
 
 import kr.nutee.dto.Board;
-import kr.nutee.model.BoardInsertAndUpdateRequestDto;
+import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
 
 /*
  * Board Service Interface

@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.nutee.dto.Board;
-import kr.nutee.model.BoardInsertAndUpdateRequestDto;
+import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

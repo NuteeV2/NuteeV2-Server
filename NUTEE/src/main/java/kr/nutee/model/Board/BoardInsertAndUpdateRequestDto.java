@@ -1,4 +1,4 @@
-package kr.nutee.model;
+package kr.nutee.model.Board;
 
 import javax.validation.constraints.NotBlank;
 

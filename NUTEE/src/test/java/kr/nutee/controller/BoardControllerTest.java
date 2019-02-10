@@ -28,7 +28,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import kr.nutee.dto.Board;
 import kr.nutee.exception.BadRequestException;
-import kr.nutee.model.BoardInsertAndUpdateRequestDto;
+import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
 import kr.nutee.service.impl.BoardServiceImpl;
 import kr.nutee.util.JsonUtils;
 

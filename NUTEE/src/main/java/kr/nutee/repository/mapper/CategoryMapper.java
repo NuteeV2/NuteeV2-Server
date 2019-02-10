@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import kr.nutee.dto.Category;
-import kr.nutee.model.CategoryInsertRequestDto;
-import kr.nutee.model.CategoryUpdateRequestDto;
+import kr.nutee.model.Category.CategoryInsertRequestDto;
+import kr.nutee.model.Category.CategoryUpdateRequestDto;
 
 /*
  * Category Mapper Interface

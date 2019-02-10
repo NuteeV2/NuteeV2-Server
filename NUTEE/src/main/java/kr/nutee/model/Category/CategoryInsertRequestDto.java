@@ -1,4 +1,4 @@
-package kr.nutee.model;
+package kr.nutee.model.Category;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
