@@ -1,13 +1,11 @@
 package kr.nutee.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.nutee.dao.Board;
-import kr.nutee.exception.BadRequestException;
 import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
 import kr.nutee.repository.mapper.BoardMapper;
 import kr.nutee.service.BoardService;
@@ -36,8 +34,7 @@ public class BoardServiceImpl implements BoardService{
 	 */
 	@Override
 	public Board findOne(int id) {
-		Board board = Optional.ofNullable(boardMapper.findOne(id)).orElseThrow(()->new BadRequestException("NonExist Board id "+id));
-		return board;
+		return boardMapper.findOne(id);
 	}
 
 	/*
