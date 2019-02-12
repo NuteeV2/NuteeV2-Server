@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import kr.nutee.dto.Board;
+import kr.nutee.dao.Board;
 import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
 import kr.nutee.repository.mapper.BoardMapper;
 import kr.nutee.service.impl.BoardServiceImpl;

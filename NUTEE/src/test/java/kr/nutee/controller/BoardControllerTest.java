@@ -26,7 +26,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import kr.nutee.dto.Board;
+import kr.nutee.dao.Board;
 import kr.nutee.exception.BadRequestException;
 import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
 import kr.nutee.service.impl.BoardServiceImpl;
