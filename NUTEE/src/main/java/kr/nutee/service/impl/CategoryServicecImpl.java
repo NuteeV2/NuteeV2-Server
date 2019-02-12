@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import kr.nutee.dao.Category;
+import kr.nutee.exception.OverlappedException;
 import kr.nutee.model.Category.CategoryInsertRequestDto;
 import kr.nutee.model.Category.CategoryListResponseDto;
 import kr.nutee.model.Category.CategoryUpdateRequestDto;
@@ -42,6 +44,14 @@ public class CategoryServicecImpl implements CategoryService{
 	}
 
 	/*
+	 * @param 카테고리 id
+	 */
+	@Override
+	public Category findOne(int id) {
+		return categoryMapper.findOne(id);
+	}
+
+	/*
 	 * @param 게시판 id, 카테고리 이름
 	 */
 	@Override
@@ -51,12 +61,15 @@ public class CategoryServicecImpl implements CategoryService{
 
 	/*
 	 * @param 카테고리 id, 카테고리 이름
-	 * @return
 	 */
 	@Override
 	public void update(int id, CategoryUpdateRequestDto category) {
-		//TODO 중복 검사
-		categoryMapper.update(id, category);
+		try{
+			categoryMapper.update(id, category);
+		}
+		catch(DataIntegrityViolationException e) {
+			throw new OverlappedException("categoryName", "Category name already exist");
+		}
 	}
 
 	/*
