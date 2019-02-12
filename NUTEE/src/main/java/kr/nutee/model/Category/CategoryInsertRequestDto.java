@@ -19,7 +19,7 @@ public class CategoryInsertRequestDto {
 	@NotBlank(message="CategoryName requires not blank value")
 	private String categoryName;
 
-	@NotNull(message="BoardId of Category requires not null")
+	@NotNull(message="BoardId requires not null")
 	private int boardId;
 
 }
