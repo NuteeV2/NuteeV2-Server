@@ -46,7 +46,7 @@ public class CategoryController {
 		 */
 		@GetMapping("{boardId}")
 		public ResponseEntity<CustomResponseBody> categories(@PathVariable("boardId") int boardId){
-			CustomResponseBody body = new CustomResponseBody(categoryService.findAllByBoardId(boardId));
+			CustomResponseBody body = new CustomResponseBody(categoryService.findAllByBoardId(boardId), null);
 			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 		}
 
