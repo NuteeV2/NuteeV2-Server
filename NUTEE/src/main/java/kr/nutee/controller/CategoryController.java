@@ -46,7 +46,7 @@ public class CategoryController {
 		 */
 		@GetMapping("{boardId}")
 		public ResponseEntity<CustomResponseBody> categories(@PathVariable("boardId") int boardId){
-			CustomResponseBody body = new CustomResponseBody(HttpStatus.OK, categoryService.findAllByBoardId(boardId));
+			CustomResponseBody body = new CustomResponseBody(categoryService.findAllByBoardId(boardId));
 			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 		}
 
@@ -58,7 +58,7 @@ public class CategoryController {
 		@PostMapping("")
 		public ResponseEntity<CustomResponseBody> insert(@Valid @RequestBody CategoryInsertRequestDto category){
 			categoryService.insert(category);
-			CustomResponseBody body = new CustomResponseBody(HttpStatus.CREATED);
+			CustomResponseBody body = new CustomResponseBody();
 			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.CREATED);
 		}
 
@@ -70,8 +70,8 @@ public class CategoryController {
 		@PatchMapping("{id}")
 		public ResponseEntity<CustomResponseBody> update(@PathVariable("id") int id, @Valid @RequestBody CategoryUpdateRequestDto category){
 			categoryService.update(id, category);
-			CustomResponseBody body = new CustomResponseBody(HttpStatus.OK);
-			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+			CustomResponseBody body = new CustomResponseBody();
+			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
 		}
 
 }
