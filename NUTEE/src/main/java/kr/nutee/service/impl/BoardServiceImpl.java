@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.nutee.dto.Board;
+import kr.nutee.dao.Board;
 import kr.nutee.exception.BadRequestException;
 import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
 import kr.nutee.repository.mapper.BoardMapper;

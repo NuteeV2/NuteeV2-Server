@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.nutee.dto.Category;
+import kr.nutee.dao.Category;
 import kr.nutee.model.Category.CategoryInsertRequestDto;
 import kr.nutee.model.Category.CategoryListResponseDto;
 import kr.nutee.model.Category.CategoryUpdateRequestDto;
@@ -55,6 +55,7 @@ public class CategoryServicecImpl implements CategoryService{
 	 */
 	@Override
 	public void update(int id, CategoryUpdateRequestDto category) {
+		//TODO 중복 검사
 		categoryMapper.update(id, category);
 	}
 
