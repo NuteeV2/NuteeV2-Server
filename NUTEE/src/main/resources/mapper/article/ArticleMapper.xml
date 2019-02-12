@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.nutee.repository.mapper.ArticleMapper">
+
+	<select id="findAll" resultType="Article">
+		SELECT a.*, u.nickname, 
+			(SELECT COUNT(*) from Articleempathy e WHERE e.articleId = a.id) empathy 
+		FROM Article a 
+		LEFT JOIN user u ON a.userId = u.id
+		WHERE a.deleted = 'N' AND a.boardId = #{boardId}
+		ORDER BY a.id;
+	</select>
+	
+	<select id="findOne" resultType="Article">
+		SELECT a.*, u.nickname, 
+			(SELECT COUNT(*) from Articleempathy e WHERE e.articleId = a.id) empathy 
+		FROM Article a 
+		LEFT JOIN user u ON a.userId = u.id
+		WHERE a.deleted = 'N' AND a.id = #{id}
+		ORDER BY a.id;
+	</select>
+	
+	<!-- <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT Category(categoryName, boardId)
+		VALUES(#{categoryName}, #{boardId})
+	</insert>
+	
+	<update id="update">
+	  	UPDATE Category
+	  	SET categoryName=#{category.categoryName}
+	  	WHERE id=#{id}
+	</update>
+	
+	<delete id="delete">
+	  	DELETE FROM Category WHERE id=#{id}
+	</delete> -->
+
+</mapper>
