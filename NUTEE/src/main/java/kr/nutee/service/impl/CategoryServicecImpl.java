@@ -8,7 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import kr.nutee.dao.Category;
-import kr.nutee.exception.OverlappedException;
+import kr.nutee.exception.DuplicationException;
 import kr.nutee.model.Category.CategoryInsertRequestDto;
 import kr.nutee.model.Category.CategoryListResponseDto;
 import kr.nutee.model.Category.CategoryUpdateRequestDto;
@@ -68,7 +68,7 @@ public class CategoryServicecImpl implements CategoryService{
 			categoryMapper.update(id, category);
 		}
 		catch(DataIntegrityViolationException e) {
-			throw new OverlappedException("categoryName", "Category name already exist");
+			throw new DuplicationException("categoryName", "Category name already exist");
 		}
 	}
 
