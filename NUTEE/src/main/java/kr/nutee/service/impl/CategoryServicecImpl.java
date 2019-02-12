@@ -56,7 +56,11 @@ public class CategoryServicecImpl implements CategoryService{
 	 */
 	@Override
 	public void insert(CategoryInsertRequestDto category) {
-		categoryMapper.insert(category);
+		try {
+			categoryMapper.insert(category);
+		}catch(DataIntegrityViolationException e) {
+			throw new DuplicationException("categoryName", "Category name already exist");
+		}
 	}
 
 	/*
