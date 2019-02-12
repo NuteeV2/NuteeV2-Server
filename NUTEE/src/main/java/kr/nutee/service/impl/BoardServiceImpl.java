@@ -3,9 +3,11 @@ package kr.nutee.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import kr.nutee.dao.Board;
+import kr.nutee.exception.DuplicationException;
 import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
 import kr.nutee.repository.mapper.BoardMapper;
 import kr.nutee.service.BoardService;
@@ -42,13 +44,11 @@ public class BoardServiceImpl implements BoardService{
 	 */
 	@Override
 	public void insert(BoardInsertAndUpdateRequestDto board){
-		boardMapper.insert(board);
-	}
-
-	@Override
-	public void delete(int id) {
-		// TODO delete 메소드 작성해야 함..
-
+		try {
+			boardMapper.insert(board);
+		}catch(DataIntegrityViolationException e) {
+			throw new DuplicationException("boardName", "Board name already exist");
+		}
 	}
 
 	/*
@@ -56,8 +56,17 @@ public class BoardServiceImpl implements BoardService{
 	 */
 	@Override
 	public void update(int id, BoardInsertAndUpdateRequestDto board) {
-		//TODO bad request 처리 해야하나..? 없는 id여도 update query는 성공 뜨고 디비엔 아무 변화도 없네
-		boardMapper.update(id, board);
+		try {
+			boardMapper.update(id, board);
+		}catch(DataIntegrityViolationException e) {
+			throw new DuplicationException("boardName", "Board name already exist");
+		}
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO delete 메소드 작성해야 함..
+
 	}
 
 }
