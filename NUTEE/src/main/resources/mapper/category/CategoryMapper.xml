@@ -5,9 +5,14 @@
 <mapper namespace="kr.nutee.repository.mapper.CategoryMapper">
 
 	<select id="findAllByBoardId" resultType="Category">
-		SELECT c.id, c.categoryName, c.boardId FROM Category c 
+		SELECT c.* FROM Category c 
 		LEFT JOIN Board b ON c.boardId = b.id 
-		WHERE c.boardId = #{boardId};
+		WHERE c.boardId = #{boardId}
+	</select>
+	
+	<select id="findOne" resultType="Category">
+		SELECT * FROM Category
+		WHERE id = #{id}
 	</select>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
