@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import kr.nutee.dto.Board;
+import kr.nutee.dao.Board;
 import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
 
 /*
