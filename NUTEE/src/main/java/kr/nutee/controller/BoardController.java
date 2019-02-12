@@ -2,8 +2,6 @@ package kr.nutee.controller;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +26,6 @@ import kr.nutee.service.impl.BoardServiceImpl;
 @RequestMapping("/api/boards")
 public class BoardController {
 
-	//Logging
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	private final BoardServiceImpl boardService;
 
 	@Autowired
@@ -46,7 +41,7 @@ public class BoardController {
 	 */
 	@GetMapping("")
 	public ResponseEntity<CustomResponseBody> boards(){
-		CustomResponseBody body = new CustomResponseBody(boardService.findAll());
+		CustomResponseBody body = new CustomResponseBody(boardService.findAll(), null);
 		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
@@ -58,7 +53,7 @@ public class BoardController {
 	 */
 	@GetMapping("{id}")
 	public ResponseEntity<CustomResponseBody> board(@PathVariable("id") int id) {
-		CustomResponseBody body = new CustomResponseBody(boardService.findOne(id));
+		CustomResponseBody body = new CustomResponseBody(boardService.findOne(id), null);
 		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
