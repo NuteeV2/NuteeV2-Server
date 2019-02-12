@@ -1,4 +1,4 @@
-package kr.nutee.dto;
+package kr.nutee.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

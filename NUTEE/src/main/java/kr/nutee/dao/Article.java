@@ -1,4 +1,4 @@
-package kr.nutee.dto;
+package kr.nutee.dao;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,5 +27,7 @@ public class Article {
 	private int boardId;
 	private String deleted;
 	private int report;
+	private String nickname;
+	private int empathy;
 
 }
