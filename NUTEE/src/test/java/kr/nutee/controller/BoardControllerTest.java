@@ -2,7 +2,6 @@ package kr.nutee.controller;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -27,7 +26,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import kr.nutee.dao.Board;
-import kr.nutee.exception.BadRequestException;
 import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
 import kr.nutee.service.impl.BoardServiceImpl;
 import kr.nutee.util.JsonUtils;
@@ -81,13 +79,6 @@ public class BoardControllerTest {
 			.andExpect(jsonPath("$.boardName", is(board.getBoardName())));
 
 		Mockito.verify(boardService).findOne(this.board.getId());
-	}
-
-	@Test
-	public void 게시판하나_잘못된Url() throws Exception{
-		int id = 10;
-		mockMvc.perform(get("/api/boards/{id}", id))
-			.andExpect((r)->assertTrue(r.getResolvedException().getClass().isAssignableFrom(BadRequestException.class)));
 	}
 
 	@Test
