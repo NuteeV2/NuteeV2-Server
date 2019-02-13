@@ -68,7 +68,8 @@ public class CategoryController {
 		 * @return ResponseEntity<CustomResponseBody>
 		 */
 		@PatchMapping("{id}")
-		public ResponseEntity<CustomResponseBody> update(@PathVariable("id") int id, @Valid @RequestBody CategoryUpdateRequestDto category){
+		public ResponseEntity<CustomResponseBody> update(@PathVariable("id") int id,
+				@Valid @RequestBody CategoryUpdateRequestDto category){
 			categoryService.update(id, category);
 			CustomResponseBody body = new CustomResponseBody();
 			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
