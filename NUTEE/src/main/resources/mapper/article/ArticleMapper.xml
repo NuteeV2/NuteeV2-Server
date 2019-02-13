@@ -13,6 +13,15 @@
 		ORDER BY a.id;
 	</select>
 	
+	<select id="findAllByCategoryId" resultType="Article">
+		SELECT a.*, u.nickname, 
+			(SELECT COUNT(*) from Articleempathy e WHERE e.articleId = a.id) empathy 
+		FROM Article a 
+		LEFT JOIN user u ON a.userId = u.id
+		WHERE a.deleted = 'N' AND a.categoryId = #{categoryId}
+		ORDER BY a.id;
+	</select>
+	
 	<select id="findOne" resultType="Article">
 		SELECT a.*, u.nickname, 
 			(SELECT COUNT(*) from Articleempathy e WHERE e.articleId = a.id) empathy 
@@ -22,19 +31,28 @@
 		ORDER BY a.id;
 	</select>
 	
-	<!-- <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-		INSERT Category(categoryName, boardId)
-		VALUES(#{categoryName}, #{boardId})
+	<update id="hit">
+		UPDATE Article 
+		SET hits = hits + 1 
+		WHERE id = #{id}
+	</update>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT Article(title, contents, userId, anonymous, categoryId, boardId)
+		VALUES(#{title}, #{contents}, #{userId}, #{anonymous}, #{categoryId}, #{boardId})
 	</insert>
 	
 	<update id="update">
-	  	UPDATE Category
-	  	SET categoryName=#{category.categoryName}
+	  	UPDATE Article
+	  	SET title = #{article.title}, contents = #{article.contents}, 
+	  	anonymous = #{article.anonymous}, categoryId = #{article.categoryId}
 	  	WHERE id=#{id}
 	</update>
 	
-	<delete id="delete">
-	  	DELETE FROM Category WHERE id=#{id}
-	</delete> -->
+	<update id="delete">
+	  	UPDATE Article
+	  	SET deleted = "Y"
+	  	WHERE id = #{id}
+	</update>
 
 </mapper>
