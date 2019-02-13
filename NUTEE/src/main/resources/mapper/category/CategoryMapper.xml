@@ -8,6 +8,7 @@
 		SELECT c.* FROM Category c 
 		LEFT JOIN Board b ON c.boardId = b.id 
 		WHERE c.boardId = #{boardId}
+		ORDER BY c.id
 	</select>
 	
 	<select id="findOne" resultType="Category">
