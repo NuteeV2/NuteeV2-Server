@@ -4,6 +4,7 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 /*
@@ -15,6 +16,7 @@ import lombok.ToString;
  * @author choiyk
  */
 @Getter
+@Setter
 @ToString
 @AllArgsConstructor
 public class CustomResponseBody {
