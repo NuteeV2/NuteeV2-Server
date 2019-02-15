@@ -1,28 +1,21 @@
-package kr.nutee.dao;
+package kr.nutee.model.user;
 
 import javax.validation.constraints.NotBlank;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/*
- * User 테이블의 데이터를 담기 위한 DTO 클래스
- *
- * @author choiyk
- */
+@AllArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class User {
-
-	private int id;
+public class UserUpdateModel {
 	
-	private int coution;
+	private int id;
 	
 	@NotBlank(message="nickname requires non blank value")
 	private String nickname;
@@ -30,12 +23,7 @@ public class User {
 	@NotBlank(message="pw requires non blank value")
 	private String pw;
 	
-	@NotBlank(message="studentNumber requires non blank value")
-	private String studentNumber;
-	
-	private int roleId;
-	
 	@NotBlank(message="email requires non blank value")
 	private String email;
-
+	
 }

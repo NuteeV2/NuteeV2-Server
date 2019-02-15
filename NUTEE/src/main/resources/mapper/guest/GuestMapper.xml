@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.nutee.repository.mapper.GuestMapper">
+
+	<select id="login" resultType="User">
+		SELECT * FROM USER
+		WHERE nickname = #{param1} AND pw = #{param2}
+	</select>
+
+	<insert id="signUp" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO USER (nickname, pw, studentNumber, roleId, coution, email)
+		VALUES (#{nickname}, #{pw}, #{studentNumber}, #{roleId}, #{coution}, #{email});
+	</insert>
+
+</mapper>

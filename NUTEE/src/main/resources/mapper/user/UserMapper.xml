@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.nutee.repository.mapper.UserMapper">
+
+	<select id="login" resultType="User">
+		SELECT * FROM USER
+		WHERE nickname = #{param1} AND pw = #{param2}
+	</select>
+	
+	<select id="findSign" resultType="User">
+		SELECT * FROM USER
+		WHERE studentNumber = #{param1} AND email = #{param2}
+	</select>
+	
+	<select id="findOne" resultType="User">
+		SELECT * FROM USER
+		WHERE id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE USER
+		SET nickname = #{nickname}, pw = #{pw}, email = #{email}
+		WHERE id = #{id}
+	</update>
+
+	<update id="delete">
+		UPDATE USER
+		SET deleted = 'Y'
+		WHERE id = #{id}
+	</update>
+</mapper>
