@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/studentrepresentative/**").hasAuthority("ROLE_STUDENTREPRESENTATIVE")
 				.antMatchers("/club/**").hasAuthority("ROLE_CLUB").antMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN", "ROLE_STUDENTREPRESENTATIVE", "ROLE_CLUB")
 				.antMatchers("/warning/**").hasAuthority("ROLE_WARNING").antMatchers("/suspension/**")
-				.hasAuthority("ROLE_SUSPENSION").antMatchers("/guest/**").permitAll().antMatchers("/").permitAll()
+				.hasAuthority("ROLE_SUSPENSION").antMatchers("/comment/**").permitAll().antMatchers("/guest/**").permitAll().antMatchers("/").permitAll()
 				.antMatchers("/**").authenticated();
 		http.csrf().disable();
 		http.formLogin().loginProcessingUrl("/guest/login")

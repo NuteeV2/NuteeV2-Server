@@ -1,8 +1,11 @@
 package kr.nutee.dao;
 
+import javax.validation.constraints.NotEmpty;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 /*
@@ -11,13 +14,13 @@ import lombok.ToString;
  * @author choiyk
  */
 @Getter
+@Setter
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
 public class Comment {
 
 	private int id;
-	private String contents;
 	private String dates;
 	private int userId;
 	private String anonymous;
@@ -26,4 +29,7 @@ public class Comment {
 	private int reCommentId;
 	private int articleId;
 
+	@NotEmpty(message="contents requires non blank value")
+	private String contents;
+	
 }
