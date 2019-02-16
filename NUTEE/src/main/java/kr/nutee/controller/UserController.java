@@ -72,7 +72,7 @@ public class UserController {
 	/**
 	 * Update a user
 	 * 
-	 * @param UserUpdateModel nickname, pw and email
+	 * @param UserUpdateModel id, nickname, pw and email
 	 * @return ResponseEntity<CustomResponseBody>
 	 */
 	@PutMapping("update")

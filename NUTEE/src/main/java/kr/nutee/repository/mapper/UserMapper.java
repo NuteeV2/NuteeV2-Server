@@ -12,7 +12,6 @@ import kr.nutee.model.user.UserUpdateModel;
 public interface UserMapper {
 	
 	/**
-	 * 
 	 * @param nickname
 	 * @param pw
 	 * @return User
@@ -20,7 +19,6 @@ public interface UserMapper {
 	public abstract User login(final String nickname, final String pw);
 	
 	/**
-	 * 
 	 * @param studentNumber
 	 * @param email
 	 * @return User
@@ -33,13 +31,13 @@ public interface UserMapper {
 	public abstract void delete(final int id);
 	
 	/**
-	 * @param UserUpdateModel nickname, pw and email
+	 * @param UserUpdateModel id, nickname, pw and email
 	 */
 	public abstract void update(final UserUpdateModel user);
 	
 	/**
 	 * @param id user ID for find a user
-	 * @return
+	 * @return User
 	 */
 	public abstract User findOne(int id);
 }

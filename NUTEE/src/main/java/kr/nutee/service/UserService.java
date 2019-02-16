@@ -28,7 +28,7 @@ public interface UserService {
 	public abstract void delete(final int id);
 	
 	/**
-	 * @param UserUpdateModel nickname, pw and email
+	 * @param UserUpdateModel id, nickname, pw and email
 	 */
 	public abstract void update(final UserUpdateModel user);
 	

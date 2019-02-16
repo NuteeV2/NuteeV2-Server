@@ -14,12 +14,12 @@ public interface CommentService {
 	public abstract void create(final Comment comment);
 	
 	/**
-	 * @param Comment contents, userId, anonymous and articleId
+	 * @param Comment id, contents, userId, anonymous and articleId
 	 */
 	public abstract void update(final Comment comment);
 	
 	/**
-	 * @param id user ID
+	 * @param id comment ID
 	 */
 	public abstract void delete(final int id);
 }

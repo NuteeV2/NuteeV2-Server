@@ -26,7 +26,7 @@ public class Comment {
 	private String anonymous;
 	private String deleted;
 	private int report;
-	private int reCommentId;
+	private int recommentId;
 	private int articleId;
 
 	@NotEmpty(message="contents requires non blank value")
