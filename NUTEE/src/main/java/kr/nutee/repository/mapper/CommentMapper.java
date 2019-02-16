@@ -16,12 +16,12 @@ public interface CommentMapper {
 	public abstract void create(final Comment comment);
 	
 	/**
-	 * @param Comment contents, userId, anonymous and articleId
+	 * @param Comment id, contents, userId, anonymous and articleId
 	 */
 	public abstract void update(final Comment comment);
 	
 	/**
-	 * @param id customer ID to be deleted
+	 * @param id comment ID to be deleted
 	 */
 	public abstract void delete(final int id);
 }
