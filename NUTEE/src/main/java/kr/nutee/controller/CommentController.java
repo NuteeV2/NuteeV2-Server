@@ -16,6 +16,9 @@ import kr.nutee.dao.Comment;
 import kr.nutee.model.CustomResponseBody;
 import kr.nutee.service.CommentService;
 
+/**
+ * CommentController class
+ */
 @RestController
 @RequestMapping("comment")
 public class CommentController {
@@ -27,6 +30,12 @@ public class CommentController {
 		this.commentService = commentService;
 	}
 	
+	/**
+	 * Create a comment
+	 * 
+	 * @param Comment contents, userId, anonymous and articleId
+	 * @return ResponseEntity<CustomResponseBody>
+	 */
 	@PostMapping("create")
 	public ResponseEntity<CustomResponseBody> create(@Valid final Comment comment) {
 		commentService.create(comment);
@@ -34,17 +43,29 @@ public class CommentController {
 		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.CREATED);
 	}
 	
+	/**
+	 * Update a comment
+	 * 
+	 * @param Comment contents, userId, anonymous and articleId
+	 * @return ResponseEntity<CustomResponseBody>
+	 */
 	@PutMapping("update")
 	public ResponseEntity<CustomResponseBody> update(@Valid final Comment comment) {
 		commentService.update(comment);
 		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 	
+	/**
+	 * Patch a comment
+	 * 
+	 * @param id customer ID to be deleted
+	 * @return ResponseEntity<CustomResponseBody>
+	 */
 	@PatchMapping("delete/{id}")
 	public ResponseEntity<CustomResponseBody> delete(@PathVariable("id") int id) {
 		commentService.delete(id);
 		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 }

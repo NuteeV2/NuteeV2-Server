@@ -13,6 +13,9 @@ import kr.nutee.service.UserService;
 import kr.nutee.util.EncryptionUtils;
 import kr.nutee.util.Random;
 
+/**
+ * UserService Implementation
+ */
 @Service
 public class UserServiceImpl implements UserService {
 

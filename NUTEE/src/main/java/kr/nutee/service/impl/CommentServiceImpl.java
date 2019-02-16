@@ -7,6 +7,9 @@ import kr.nutee.dao.Comment;
 import kr.nutee.repository.mapper.CommentMapper;
 import kr.nutee.service.CommentService;
 
+/**
+ * CommentService Implementation
+ */
 @Service
 public class CommentServiceImpl implements CommentService {
 	

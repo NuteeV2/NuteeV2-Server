@@ -18,6 +18,10 @@ import kr.nutee.model.CustomResponseBody;
 import kr.nutee.model.user.UserUpdateModel;
 import kr.nutee.service.UserService;
 
+
+/**
+ * UserController class
+ */
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -30,22 +34,47 @@ public class UserController {
 		this.userService = userService;
 	}
 
+	/**
+	 * Login
+	 * 
+	 * @param nickname
+	 * @param pw
+	 * @return ResponseEntity<CustomResponseBody>
+	 */
 	@PostMapping("login")
 	public ResponseEntity<CustomResponseBody> login(final String nickname, final String pw) {
 		User user = userService.login(nickname, pw);
 		CustomResponseBody body = new CustomResponseBody();
 		if (user == null)
-			return new ResponseEntity<>(body, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
 		else
 			return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 	
+	
+	/**
+	 * find a user
+	 * 
+	 * @param id user ID
+	 * @return ResponseEntity<CustomResponseBody>
+	 */
 	@GetMapping("findOne/{id}")
 	public ResponseEntity<CustomResponseBody> findOne(@PathVariable("id") final int id) {
-		CustomResponseBody body = new CustomResponseBody(userService.findOne(id), null);
+		User user = userService.findOne(id);
+		if (user == null) {
+			CustomResponseBody body = new CustomResponseBody();
+			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NOT_FOUND);
+		}
+		CustomResponseBody body = new CustomResponseBody(user, null);
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 	
+	/**
+	 * Update a user
+	 * 
+	 * @param UserUpdateModel nickname, pw and email
+	 * @return ResponseEntity<CustomResponseBody>
+	 */
 	@PutMapping("update")
 	public ResponseEntity<CustomResponseBody> update(@Valid final UserUpdateModel user) {
 		userService.update(user);
@@ -53,6 +82,12 @@ public class UserController {
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 
+	/**
+	 * Patch a user
+	 * 
+	 * @param id user ID
+	 * @return ResponseEntity<CustomResponseBody>
+	 */
 	@PatchMapping("delete/{id}")
 	public ResponseEntity<CustomResponseBody> delete(@PathVariable("id") final int id) {
 		userService.delete(id);
@@ -60,6 +95,11 @@ public class UserController {
 		return new ResponseEntity<>(body, HttpStatus.OK);
 	}
 
+	/**
+	 * Logout
+	 * 
+	 * @return ResponseEntity<CustomResponseBody>
+	 */
 	@GetMapping("logout")
 	public ResponseEntity<CustomResponseBody> logout() {
 		CustomResponseBody body = new CustomResponseBody();

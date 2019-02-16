@@ -1,5 +1,8 @@
 package kr.nutee.util;
 
+/**
+ * Random class
+ */
 public class Random {
 	
 	public static String makeRandomNumber() {

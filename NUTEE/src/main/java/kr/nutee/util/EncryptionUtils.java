@@ -2,6 +2,9 @@ package kr.nutee.util;
 
 import java.security.MessageDigest;
 
+/**
+ * Encryption class
+ */
 public class EncryptionUtils {
 	public static String encryptSHA256(String s) {
 		return encrypt(s, "SHA-256");

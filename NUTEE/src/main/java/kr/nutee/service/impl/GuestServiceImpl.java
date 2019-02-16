@@ -10,6 +10,9 @@ import kr.nutee.repository.mapper.GuestMapper;
 import kr.nutee.service.GuestService;
 import kr.nutee.util.EncryptionUtils;
 
+/**
+ * GuestService Implementation
+ */
 @Service
 public class GuestServiceImpl implements GuestService {
 

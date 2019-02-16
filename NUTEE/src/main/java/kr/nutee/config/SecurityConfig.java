@@ -9,6 +9,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import kr.nutee.service.MyAuthenticationProvider;
 
+/**
+ * Security configuration class
+ */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
@@ -29,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/**").authenticated();
 		http.csrf().disable();
 		http.formLogin().loginProcessingUrl("/guest/login")
-				.failureUrl("/guest/login?error").defaultSuccessUrl("/guest/success", true).usernameParameter("nickname")
+				.failureUrl("/guest/error").defaultSuccessUrl("/guest/success", true).usernameParameter("nickname")
 				.passwordParameter("pw");
 		http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
 				.logoutSuccessUrl("/guest/index").invalidateHttpSession(true);

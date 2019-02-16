@@ -15,6 +15,10 @@ import org.springframework.stereotype.Service;
 
 import kr.nutee.model.user.UserUpdateModel;
 
+
+/**
+ * MailService class
+ */
 @Service
 public class MailService {
 	

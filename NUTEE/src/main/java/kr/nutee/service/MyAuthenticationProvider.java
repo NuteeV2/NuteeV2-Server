@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
 
 import kr.nutee.dao.User;
 
+/**
+ * AuthenticationProvider Implementation
+ */
 @Component
 public class MyAuthenticationProvider implements AuthenticationProvider {
 	@Autowired
