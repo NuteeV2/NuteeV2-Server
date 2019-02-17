@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.nutee.repository.mapper.ArticleEmpathyMapper">
+
+	<select id="findAllByArticleId" resultType="ArticleEmpathy">
+		SELECT * FROM Articleempathy WHERE articleId = #{articleId}
+	</select>
+
+	<select id="countByArticleId" resultType="int">
+		SELECT COUNT(*) FROM Articleempathy WHERE articleId = #{articleId}
+	</select>
+
+	<insert id="insert">
+		INSERT Articleempathy(userId, articleId)
+		VALUES(#{userId}, #{articleId})
+	</insert>
+	
+	<delete id="delete">
+	  	DELETE FROM Articleempathy
+	  	WHERE userId = #{userId} AND artticleId = #{articleId}
+	</delete>
+
+</mapper>
