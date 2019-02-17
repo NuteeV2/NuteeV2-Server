@@ -22,6 +22,5 @@ public class ArticleResponseDto {
 	private int hits;
 	private int report;
 	private String nickname;	//익명으로 작성된 게시글의 경우 '스누피'
-	private int empathy;
 
 }

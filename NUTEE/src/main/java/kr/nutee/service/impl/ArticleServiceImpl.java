@@ -69,6 +69,7 @@ public class ArticleServiceImpl implements ArticleService{
 	 * @param 게시글 id
 	 */
 	@Override
+	@Transactional
 	public void hit(int id) {
 		articleMapper.hit(id);
 	}
@@ -109,7 +110,7 @@ public class ArticleServiceImpl implements ArticleService{
 		//익명으로 작성된 게시글인 경우 '스누피'
 		String nickname = article.getNickname();
 		if(article.getAnonymous().equals("Y")) nickname = "스누피";
-		ArticleResponseDto aDTO = new ArticleResponseDto(article.getId(), article.getTitle(), article.getContents(), article.getDates(), article.getUserId(), article.getCategoryId(), article.getHits(), article.getReport(), nickname, article.getEmpathy());
+		ArticleResponseDto aDTO = new ArticleResponseDto(article.getId(), article.getTitle(), article.getContents(), article.getDates(), article.getUserId(), article.getCategoryId(), article.getHits(), article.getReport(), nickname);
 		return aDTO;
 	}
 
