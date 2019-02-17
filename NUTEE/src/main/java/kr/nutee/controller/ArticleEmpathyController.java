@@ -41,7 +41,7 @@ public class ArticleEmpathyController {
 	public ResponseEntity<CustomResponseBody> findAllByArticleId(@PathVariable("articleId") int articleId){
 		List<ArticleEmpathy> articleEmpathies = articleEmpathyService.findAllByArticleId(articleId);
 		CustomResponseBody body = new CustomResponseBody(articleEmpathies, null);
-		if(articleEmpathies == null)
+		if(articleEmpathies.isEmpty())
 			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
 		else return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}

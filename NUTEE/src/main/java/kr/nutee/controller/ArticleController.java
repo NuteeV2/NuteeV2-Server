@@ -48,7 +48,7 @@ public class ArticleController {
 	public ResponseEntity<CustomResponseBody> boardArticles(@PathVariable("boardId") int boardId){
 		List<ArticleListResponseDto> articles = articleService.findAll(boardId);
 		CustomResponseBody body = new CustomResponseBody(articles, null);
-		if(articles == null) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		if(articles.isEmpty()) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
 		else return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
@@ -61,7 +61,7 @@ public class ArticleController {
 	public ResponseEntity<CustomResponseBody> categoryArticles(@PathVariable("categoryId") int categoryId){
 		List<ArticleListResponseDto> articles = articleService.findAllByCategoryId(categoryId);
 		CustomResponseBody body = new CustomResponseBody(articles, null);
-		if(articles == null) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		if(articles.isEmpty()) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
 		else return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
@@ -74,7 +74,7 @@ public class ArticleController {
 	public ResponseEntity<CustomResponseBody> userArticles(@PathVariable("userId") int userId){
 		List<ArticleListResponseDto> articles = articleService.findAllByUserId(userId);
 		CustomResponseBody body = new CustomResponseBody(articles, null);
-		if(articles == null) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		if(articles.isEmpty()) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
 		else return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
@@ -87,7 +87,7 @@ public class ArticleController {
 	public ResponseEntity<CustomResponseBody> articles(@PathVariable("id") int id){
 		ArticleResponseDto article = articleService.findOne(id);
 		CustomResponseBody body = new CustomResponseBody(article, null);
-		if(article == null) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		if(article==null) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
 		else return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
