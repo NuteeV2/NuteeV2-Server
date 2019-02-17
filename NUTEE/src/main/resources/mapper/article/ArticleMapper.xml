@@ -22,7 +22,7 @@
 		ORDER BY a.id;
 	</select>
 	
-	<select id="findAllByCategoryId" resultType="Article">
+	<select id="findAllByUserId" resultType="Article">
 		SELECT a.*, u.nickname, 
 			(SELECT COUNT(*) from Articleempathy e WHERE e.articleId = a.id) empathy 
 		FROM Article a 
