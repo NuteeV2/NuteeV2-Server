@@ -19,7 +19,7 @@
 	
 	<delete id="delete">
 	  	DELETE FROM Articleempathy
-	  	WHERE userId = #{userId} AND artticleId = #{articleId}
+	  	WHERE userId = #{userId} AND articleId = #{articleId}
 	</delete>
 
 </mapper>
