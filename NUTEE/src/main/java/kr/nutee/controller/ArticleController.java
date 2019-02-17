@@ -1,5 +1,7 @@
 package kr.nutee.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.nutee.model.CustomResponseBody;
 import kr.nutee.model.Article.ArticleInsertRequestDto;
+import kr.nutee.model.Article.ArticleListResponseDto;
+import kr.nutee.model.Article.ArticleResponseDto;
 import kr.nutee.model.Article.ArticleUpdateRequestDto;
 import kr.nutee.service.impl.ArticleServiceImpl;
 
@@ -42,8 +46,10 @@ public class ArticleController {
 	 */
 	@GetMapping("boards/{boardId}/articles")
 	public ResponseEntity<CustomResponseBody> boardArticles(@PathVariable("boardId") int boardId){
-		CustomResponseBody body = new CustomResponseBody(articleService.findAll(boardId), null);
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+		List<ArticleListResponseDto> articles = articleService.findAll(boardId);
+		CustomResponseBody body = new CustomResponseBody(articles, null);
+		if(articles == null) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		else return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
 	/*
@@ -53,8 +59,10 @@ public class ArticleController {
 	 */
 	@GetMapping("categories/{categoryId}/articles")
 	public ResponseEntity<CustomResponseBody> categoryArticles(@PathVariable("categoryId") int categoryId){
-		CustomResponseBody body = new CustomResponseBody(articleService.findAllByCategoryId(categoryId), null);
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+		List<ArticleListResponseDto> articles = articleService.findAllByCategoryId(categoryId);
+		CustomResponseBody body = new CustomResponseBody(articles, null);
+		if(articles == null) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		else return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
 	/*
@@ -64,8 +72,10 @@ public class ArticleController {
 	 */
 	@GetMapping("user/{userId}/articles")
 	public ResponseEntity<CustomResponseBody> userArticles(@PathVariable("userId") int userId){
-		CustomResponseBody body = new CustomResponseBody(articleService.findAllByUserId(userId), null);
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+		List<ArticleListResponseDto> articles = articleService.findAllByUserId(userId);
+		CustomResponseBody body = new CustomResponseBody(articles, null);
+		if(articles == null) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		else return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
 	/*
@@ -75,8 +85,10 @@ public class ArticleController {
 	 */
 	@GetMapping("articles/{id}")
 	public ResponseEntity<CustomResponseBody> articles(@PathVariable("id") int id){
-		CustomResponseBody body = new CustomResponseBody(articleService.findOne(id), null);
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+		ArticleResponseDto article = articleService.findOne(id);
+		CustomResponseBody body = new CustomResponseBody(article, null);
+		if(article == null) return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		else return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
 	}
 
 	/*
