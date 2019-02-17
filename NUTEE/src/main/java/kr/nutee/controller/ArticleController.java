@@ -58,6 +58,17 @@ public class ArticleController {
 	}
 
 	/*
+	 * 사용자별 게시글 반환
+	 * @param 카테고리 id
+	 * @return 카테고리별 게시글 List
+	 */
+	@GetMapping("user/{userId}/articles")
+	public ResponseEntity<CustomResponseBody> userArticles(@PathVariable("userId") int userId){
+		CustomResponseBody body = new CustomResponseBody(articleService.findAllByUserId(userId), null);
+		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+	}
+
+	/*
 	 * 게시글 하나 반환
 	 * @param 게시글 id
 	 * @return 게시글 하나

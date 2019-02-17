@@ -51,6 +51,19 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 
 	/*
+	 * 사용자별 게시글 조회
+	 * @param 카테고리 id
+	 * @return 카테고리 별 게시글
+	 */
+	@Override
+	public List<ArticleListResponseDto> findAllByUserId(int userId) {
+		//TODO 리팩토링 필요
+		List<Article> articles = articleMapper.findAllByUserId(userId);
+		if(articles == null) return null;
+		return transferDTOList(articles);
+	}
+
+	/*
 	 * 게시판의 게시글 하나 조회
 	 * @param 게시판 id, 게시글 id
 	 * @return 게시글 하나

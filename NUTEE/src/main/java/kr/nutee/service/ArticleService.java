@@ -20,6 +20,9 @@ public interface ArticleService {
 	//Category별 게시글 조회
 	List<ArticleListResponseDto> findAllByCategoryId(int categoryId);
 
+	//user별 게시글 조회
+	List<ArticleListResponseDto> findAllByUserId(int userId);
+
 	//게시글 하나 조회
 	ArticleResponseDto findOne(int id);
 

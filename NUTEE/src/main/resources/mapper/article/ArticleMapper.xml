@@ -22,6 +22,15 @@
 		ORDER BY a.id;
 	</select>
 	
+	<select id="findAllByCategoryId" resultType="Article">
+		SELECT a.*, u.nickname, 
+			(SELECT COUNT(*) from Articleempathy e WHERE e.articleId = a.id) empathy 
+		FROM Article a 
+		LEFT JOIN user u ON a.userId = u.id
+		WHERE a.deleted = 'N' AND a.userId = #{userId}
+		ORDER BY a.id;
+	</select>
+	
 	<select id="findOne" resultType="Article">
 		SELECT a.*, u.nickname, 
 			(SELECT COUNT(*) from Articleempathy e WHERE e.articleId = a.id) empathy 

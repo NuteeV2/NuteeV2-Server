@@ -22,6 +22,9 @@ public interface ArticleMapper {
 	//Category별 게시글 조회
 	List<Article> findAllByCategoryId(int categoryId);
 
+	//user별 게시글 조회
+	List<Article> findAllByUserId(int userId);
+
 	//게시글 하나 조회
 	Article findOne(int id);
 
