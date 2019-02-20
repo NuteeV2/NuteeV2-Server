@@ -1,4 +1,4 @@
-package kr.nutee.model;
+package kr.nutee.playload;
 
 import java.util.List;
 

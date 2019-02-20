@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.nutee.dao.ArticleEmpathy;
-import kr.nutee.model.CustomResponseBody;
+import kr.nutee.playload.CustomResponseBody;
 import kr.nutee.service.impl.ArticleEmpathyServiceImpl;
 
 /*

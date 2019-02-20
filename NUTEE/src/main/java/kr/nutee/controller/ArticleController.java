@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.nutee.model.CustomResponseBody;
 import kr.nutee.model.Article.ArticleInsertRequestDto;
 import kr.nutee.model.Article.ArticleListResponseDto;
 import kr.nutee.model.Article.ArticleResponseDto;
 import kr.nutee.model.Article.ArticleUpdateRequestDto;
+import kr.nutee.playload.CustomResponseBody;
 import kr.nutee.service.impl.ArticleServiceImpl;
 
 /*

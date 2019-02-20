@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.nutee.model.CustomError;
-import kr.nutee.model.CustomResponseBody;
+import kr.nutee.playload.CustomError;
+import kr.nutee.playload.CustomResponseBody;
 
 /*
  * Error 발생 시 ResponseEntity 형태로 반환하기 위한 ExceptionHandler

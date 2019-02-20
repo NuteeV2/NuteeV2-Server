@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.nutee.model.CustomResponseBody;
 import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
+import kr.nutee.playload.CustomResponseBody;
 import kr.nutee.service.impl.BoardServiceImpl;
 
 /*
