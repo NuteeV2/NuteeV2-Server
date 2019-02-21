@@ -19,6 +19,7 @@ public class File {
 	private int id;
 	private String filePath;
 	private String fileName;
+	private String fileType;
 	private int fileTableId;
 	private int colId;
 
