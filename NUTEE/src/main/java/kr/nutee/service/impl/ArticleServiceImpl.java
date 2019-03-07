@@ -14,6 +14,7 @@ import kr.nutee.model.Article.ArticleResponseDto;
 import kr.nutee.model.Article.ArticleUpdateRequestDto;
 import kr.nutee.repository.mapper.ArticleMapper;
 import kr.nutee.service.ArticleService;
+import kr.nutee.service.FileService;
 
 /*
  * Article Service 구현 클래스
@@ -23,6 +24,7 @@ import kr.nutee.service.ArticleService;
 public class ArticleServiceImpl implements ArticleService{
 
 	@Autowired ArticleMapper articleMapper;
+	@Autowired FileService fileService;
 
 	/*
 	 * 게시판의 전체 게시글 조회
@@ -92,8 +94,9 @@ public class ArticleServiceImpl implements ArticleService{
 	 * @param 게시글 제목, 내용, 작성자 id, 익명 여부, 카테고리 id, 게시판 id
 	 */
 	@Override
-	public void insert(ArticleInsertRequestDto article) {
-		articleMapper.insert(article);
+	public int insert(ArticleInsertRequestDto article) {
+		Article a = articleMapper.insert(article);
+		return a.getId();
 	}
 
 	/*
@@ -111,6 +114,7 @@ public class ArticleServiceImpl implements ArticleService{
 	 */
 	@Override
 	public void delete(int id) {
+		//TODO 댓글 함께 삭제되도록 할 것
 		articleMapper.delete(id);
 	}
 
@@ -123,7 +127,7 @@ public class ArticleServiceImpl implements ArticleService{
 		//익명으로 작성된 게시글인 경우 '스누피'
 		String nickname = article.getNickname();
 		if(article.getAnonymous().equals("Y")) nickname = "스누피";
-		ArticleResponseDto aDTO = new ArticleResponseDto(article.getId(), article.getTitle(), article.getContents(), article.getDates(), article.getUserId(), article.getCategoryId(), article.getHits(), article.getReport(), nickname);
+		ArticleResponseDto aDTO = new ArticleResponseDto(article.getId(), article.getTitle(), article.getContents(), article.getDates(), article.getUserId(), article.getCategoryId(), article.getHits(), article.getReport(), nickname, null);
 		return aDTO;
 	}
 

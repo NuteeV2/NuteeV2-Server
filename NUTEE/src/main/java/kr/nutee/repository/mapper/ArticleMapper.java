@@ -32,7 +32,7 @@ public interface ArticleMapper {
 	void hit(int id);
 
 	//게시글 작성
-	void insert(ArticleInsertRequestDto article);
+	Article insert(ArticleInsertRequestDto article);
 
 	//게시글 수정
 	void update(@Param("id") int id, @Param("article") ArticleUpdateRequestDto article);

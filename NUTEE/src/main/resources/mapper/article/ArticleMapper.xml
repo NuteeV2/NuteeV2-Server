@@ -46,7 +46,7 @@
 		WHERE id = #{id}
 	</update>
 	
-	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Article">
 		INSERT Article(title, contents, userId, anonymous, categoryId, boardId)
 		VALUES(#{title}, #{contents}, #{userId}, #{anonymous}, #{categoryId}, #{boardId})
 	</insert>
