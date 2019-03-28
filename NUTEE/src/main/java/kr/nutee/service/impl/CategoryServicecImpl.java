@@ -11,7 +11,6 @@ import kr.nutee.dao.Category;
 import kr.nutee.exception.DuplicationException;
 import kr.nutee.model.Category.CategoryInsertRequestDto;
 import kr.nutee.model.Category.CategoryListResponseDto;
-import kr.nutee.model.Category.CategoryUpdateRequestDto;
 import kr.nutee.repository.mapper.CategoryMapper;
 import kr.nutee.service.CategoryService;
 
@@ -67,7 +66,7 @@ public class CategoryServicecImpl implements CategoryService{
 	 * @param 카테고리 id, 카테고리 이름
 	 */
 	@Override
-	public void update(int id, CategoryUpdateRequestDto category) {
+	public void update(int id, String category) {
 		try{
 			categoryMapper.update(id, category);
 		}
@@ -82,8 +81,7 @@ public class CategoryServicecImpl implements CategoryService{
 	 */
 	@Override
 	public void delete(int id) {
-		// TODO delete 메소드 작성해야 함
-
+		categoryMapper.delete(id);
 	}
 
 }

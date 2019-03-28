@@ -1,5 +1,6 @@
 package kr.nutee.service.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class ArticleEmpathyServiceImpl implements ArticleEmpathyService{
 	 * @return 게시판 별 공감 목록
 	 */
 	@Override
-	public List<ArticleEmpathy> findAllByArticleId(int articleId) {
+	public List<ArticleEmpathy> findAllByArticleId(BigInteger articleId) {
 		return articleEmpathyMapper.findAllByArticleId(articleId);
 	}
 
@@ -36,7 +37,7 @@ public class ArticleEmpathyServiceImpl implements ArticleEmpathyService{
 	 * @return 게시판 별 공감 개수
 	 */
 	@Override
-	public int countByArticleId(int articleId) {
+	public BigInteger countByArticleId(BigInteger articleId) {
 		return articleEmpathyMapper.countByArticleId(articleId);
 	}
 
@@ -45,7 +46,7 @@ public class ArticleEmpathyServiceImpl implements ArticleEmpathyService{
 	 * @param articleId, userId
 	 */
 	@Override
-	public void insert(int userId, int articleId) {
+	public void insert(long userId, BigInteger articleId) {
 		try{
 			articleEmpathyMapper.insert(userId, articleId);
 		}catch(DataIntegrityViolationException e) {
@@ -58,7 +59,7 @@ public class ArticleEmpathyServiceImpl implements ArticleEmpathyService{
 	 * @param articleId, userId
 	 */
 	@Override
-	public void delete(int userId, int articleId) {
+	public void delete(long userId, BigInteger articleId) {
 		articleEmpathyMapper.delete(userId, articleId);
 	}
 

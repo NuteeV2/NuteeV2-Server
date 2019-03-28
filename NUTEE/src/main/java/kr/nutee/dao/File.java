@@ -1,9 +1,9 @@
 package kr.nutee.dao;
 
+import java.math.BigInteger;
+
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /*
@@ -12,17 +12,13 @@ import lombok.ToString;
  * @author choiyk
  */
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class File {
 
-	private int id;
-	private String filePath;
+	private BigInteger id;
 	private String fileName;
 	private String fileType;
-	private int fileTableId;
-	private int colId;
+	private int fileSize;
 
 }

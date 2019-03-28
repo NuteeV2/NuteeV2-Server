@@ -1,5 +1,6 @@
 package kr.nutee.repository.mapper;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -23,20 +24,20 @@ public interface ArticleMapper {
 	List<Article> findAllByCategoryId(int categoryId);
 
 	//user별 게시글 조회
-	List<Article> findAllByUserId(int userId);
+	List<Article> findAllByUserId(long userId);
 
 	//게시글 하나 조회
-	Article findOne(int id);
+	Article findOne(BigInteger id);
 
 	//게시글 조회수 업데이트
-	void hit(int id);
+	void hit(BigInteger id);
 
 	//게시글 작성
-	Article insert(ArticleInsertRequestDto article);
+	void insert(ArticleInsertRequestDto article);
 
 	//게시글 수정
-	void update(@Param("id") int id, @Param("article") ArticleUpdateRequestDto article);
+	void update(@Param("id") BigInteger id, @Param("article") ArticleUpdateRequestDto article);
 
 	//게시글 삭제
-	void delete(int id);
+	void delete(BigInteger id);
 }

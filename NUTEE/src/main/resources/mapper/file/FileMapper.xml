@@ -4,19 +4,14 @@
 
 <mapper namespace="kr.nutee.repository.mapper.FileMapper">
 
-	<select id="findAllByFileTableIdAndColId" resultType="File">
+	<select id="findOne" resultType="File">
 		SELECT * FROM File
-		WHERE fileTable = #{fileTable} AND colId = #{colId}
-	</select>
-	
-	<select id="findFileNameById" resultType="String">
-		SELECT fileName FROM File
 		WHERE id = #{id}
 	</select>
 	
-	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
-		INSERT File(filePath, fileName, fileTableId, colId, fileType)
-		VALUES(#{filePath}, #{fileName}, #{fileTableId}, #{colId}, #{fileType})
+	<insert id="insertAndGetId" useGeneratedKeys="true" keyProperty="id" parameterType="File">
+		INSERT File(fileName, fileType, fileSize)
+		VALUES(#{fileName}, #{fileType}, #{fileSize})
 	</insert>
 	
 	<delete id="delete">

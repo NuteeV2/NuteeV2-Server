@@ -21,16 +21,22 @@ import kr.nutee.exception.FileStorageException;
 import kr.nutee.exception.MyFileNotFoundException;
 import kr.nutee.playload.UploadFileResponse;
 import kr.nutee.property.FileStorageProperties;
+import kr.nutee.service.FileStorageService;
 
+/*
+ * File Storage Service Implements
+ * 파일 저장
+ * @author choiyk
+ */
 @Service
-public class FileStorageService {
+public class FileStorageServiceImpl implements FileStorageService{
 
 	private final Path fileStorageLocation;
 
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
     @Autowired
-    public FileStorageService(FileStorageProperties fileStorageProperties) {
+    public FileStorageServiceImpl(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
 
@@ -41,13 +47,19 @@ public class FileStorageService {
         }
     }
 
-    public UploadFileResponse storeFile(MultipartFile file) {
-        // Normalize file name
-    	Timestamp timestamp = new Timestamp(System.currentTimeMillis());	//파일의 이름 중복을 방지하기 위하여 파일 이름 재정의 (현재시간+파일이름)
+    /*
+     * 파일 하나 저장
+     * @param MultipartFile
+     * @return 파일 이름, 파일 다운로드 uri, 파일 타입, 파일 사이즈
+     */
+    @Override
+	public UploadFileResponse storeFile(MultipartFile file) {
+    	//파일의 이름 중복을 방지하기 위하여 파일 이름 재정의 (현재시간+파일이름)
+    	Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         String fileName = sdf.format(timestamp) + StringUtils.cleanPath(file.getOriginalFilename());
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+                .path("/api/downloadFile/")
                 .path(fileName)
                 .toUriString();
 
@@ -61,14 +73,20 @@ public class FileStorageService {
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            return new UploadFileResponse(fileName, fileDownloadUri,
-                    file.getContentType(), file.getSize());
+            return new UploadFileResponse(null, fileName, fileDownloadUri,
+                    file.getContentType(), (int) file.getSize());
         } catch (IOException ex) {
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
         }
     }
 
-    public Resource loadFileAsResource(String fileName) {
+    /*
+     * 파일 가져오기
+     * @param 파일 이름
+     * @return 요청한 파일의 resource
+     */
+    @Override
+	public Resource loadFileAsResource(String fileName) {
         try {
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
@@ -82,7 +100,12 @@ public class FileStorageService {
         }
     }
 
-    public void deleteFile(String fileName) {
+    /*
+     * 파일 삭제
+     * @param 파일 이름
+     */
+    @Override
+	public void deleteFile(String fileName) {
     	try {
     		Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
     		Resource resource = new UrlResource(filePath.toUri());
@@ -96,7 +119,12 @@ public class FileStorageService {
     	}
     }
 
-    public String getFileStorageLocation() {
+    /*
+     * 파일 저장 경로 가져오기
+     * @return 파일 저장 경로
+     */
+    @Override
+	public String getFileStorageLocation() {
     	return this.fileStorageLocation.toString();
     }
 

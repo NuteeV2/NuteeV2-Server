@@ -1,8 +1,8 @@
 package kr.nutee.model.Article;
 
-import java.util.List;
+import java.math.BigInteger;
+import java.sql.Timestamp;
 
-import kr.nutee.dao.File;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,15 +16,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ArticleResponseDto {
 
-	private int id;
+	private BigInteger id;
 	private String title;
 	private String contents;
-	private String dates;
-	private int userId;
+	private Timestamp dates;
+	private long userId;
 	private int categoryId;
-	private int hits;
+	private long hits;
 	private int report;
 	private String nickname;	//익명으로 작성된 게시글의 경우 '스누피'
-	private List<File> fileInfs;
 
 }

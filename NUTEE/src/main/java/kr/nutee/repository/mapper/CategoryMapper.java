@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.nutee.dao.Category;
 import kr.nutee.model.Category.CategoryInsertRequestDto;
-import kr.nutee.model.Category.CategoryUpdateRequestDto;
 
 /*
  * Category Mapper Interface
@@ -26,7 +25,7 @@ public interface CategoryMapper {
 	void insert(CategoryInsertRequestDto category);
 
 	//카테고리 이름 변경
-	void update(@Param("id") int id, @Param("category") CategoryUpdateRequestDto category);
+	void update(@Param("id") int id, @Param("categoryName") String categoryName);
 
 	//카테고리 삭제
 	void delete(int id);

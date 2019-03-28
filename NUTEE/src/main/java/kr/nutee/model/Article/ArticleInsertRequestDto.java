@@ -1,5 +1,7 @@
 package kr.nutee.model.Article;
 
+import java.math.BigInteger;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -13,6 +15,8 @@ import lombok.Data;
 @Data
 public class ArticleInsertRequestDto {
 
+	private BigInteger id;
+
 	@NotBlank(message="Article title requires not blank value")
 	private String title;
 
@@ -20,7 +24,7 @@ public class ArticleInsertRequestDto {
 	private String contents;
 
 	@NotNull(message="User id cannot be null")
-	private int userId;
+	private long userId;
 
 	@NotNull(message="Board id cannot be null")
 	private int boardId;

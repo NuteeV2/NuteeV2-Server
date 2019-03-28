@@ -8,7 +8,7 @@
 		SELECT * FROM Articleempathy WHERE articleId = #{articleId}
 	</select>
 
-	<select id="countByArticleId" resultType="int">
+	<select id="countByArticleId" resultType="BigInteger">
 		SELECT COUNT(*) FROM Articleempathy WHERE articleId = #{articleId}
 	</select>
 

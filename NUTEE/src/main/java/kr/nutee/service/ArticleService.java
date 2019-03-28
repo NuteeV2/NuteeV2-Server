@@ -1,5 +1,6 @@
 package kr.nutee.service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import kr.nutee.model.Article.ArticleInsertRequestDto;
@@ -21,21 +22,21 @@ public interface ArticleService {
 	List<ArticleListResponseDto> findAllByCategoryId(int categoryId);
 
 	//user별 게시글 조회
-	List<ArticleListResponseDto> findAllByUserId(int userId);
+	List<ArticleListResponseDto> findAllByUserId(long userId);
 
 	//게시글 하나 조회
-	ArticleResponseDto findOne(int id);
+	ArticleResponseDto findOne(BigInteger id);
 
 	//게시글 조회수 증가
-	void hit(int id);
+	void hit(BigInteger id);
 
 	//게시글 작성
-	int insert(ArticleInsertRequestDto article);
+	BigInteger insert(ArticleInsertRequestDto article);
 
 	//게시글 수정
-	void update(int id, ArticleUpdateRequestDto article);
+	void update(BigInteger id, ArticleUpdateRequestDto article);
 
 	//게시글 삭제
-	void delete(int id);
+	void delete(BigInteger id);
 
 }

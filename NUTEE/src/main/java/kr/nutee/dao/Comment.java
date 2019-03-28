@@ -1,8 +1,9 @@
 package kr.nutee.dao;
 
-import lombok.EqualsAndHashCode;
+import java.math.BigInteger;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /*
@@ -11,19 +12,18 @@ import lombok.ToString;
  * @author choiyk
  */
 @Getter
-@NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class Comment {
 
-	private int id;
+	private BigInteger id;
 	private String contents;
 	private String dates;
-	private int userId;
+	private long userId;
 	private String anonymous;
 	private String deleted;
 	private int report;
-	private int reCommentId;
-	private int articleId;
+	private BigInteger reCommentId;
+	private BigInteger articleId;
 
 }

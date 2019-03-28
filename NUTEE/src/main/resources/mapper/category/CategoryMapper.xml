@@ -23,7 +23,7 @@
 	
 	<update id="update">
 	  	UPDATE Category
-	  	SET categoryName=#{category.categoryName}
+	  	SET categoryName=#{categoryName}
 	  	WHERE id=#{id}
 	</update>
 	

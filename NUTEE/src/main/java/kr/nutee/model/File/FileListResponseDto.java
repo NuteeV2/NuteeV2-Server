@@ -1,5 +1,7 @@
 package kr.nutee.model.File;
 
+import java.math.BigInteger;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FileListResponseDto {
 
-	private int id;
+	private BigInteger id;
 	private String fileName;
 	private String fileType;
 

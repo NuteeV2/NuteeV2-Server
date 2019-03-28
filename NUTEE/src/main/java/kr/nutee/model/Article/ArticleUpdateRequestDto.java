@@ -1,11 +1,8 @@
 package kr.nutee.model.Article;
 
-import java.util.List;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
-import kr.nutee.dao.File;
 import lombok.Data;
 
 /*
@@ -23,6 +20,5 @@ public class ArticleUpdateRequestDto {
 
 	private String anonymous;
 	private int categoryId;
-	private List<File> fileInfs;
 
 }

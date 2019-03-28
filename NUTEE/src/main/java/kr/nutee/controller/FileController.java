@@ -1,6 +1,7 @@
-/*package kr.nutee.controller;
+package kr.nutee.controller;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,49 +24,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import kr.nutee.playload.CustomResponseBody;
+import kr.nutee.dao.File;
 import kr.nutee.playload.UploadFileResponse;
 import kr.nutee.service.impl.FileServiceImpl;
-import kr.nutee.service.impl.FileStorageService;
+import kr.nutee.service.impl.FileStorageServiceImpl;
 
 @RestController
-@RequestMapping("/api/files")
+@RequestMapping("/api")
 public class FileController {
 
 	private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
-    private final FileStorageService fileStorageService;
+    private final FileStorageServiceImpl fileStorageService;
     private final FileServiceImpl fileService;
 
     @Autowired
-	public FileController(FileStorageService fileStorageService, FileServiceImpl fileService) {
+	public FileController(FileStorageServiceImpl fileStorageService, FileServiceImpl fileService) {
 		this.fileStorageService = fileStorageService;
 		this.fileService = fileService;
 	}
 
+    /*
+     * 파일 업로드
+     */
     @PostMapping("uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        String fileName = fileStorageService.storeFile(file);
-
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(fileName)
-                .toUriString();
-
-        return new UploadFileResponse(fileName, fileDownloadUri,
-                file.getContentType(), file.getSize());
+    	UploadFileResponse ufr = fileStorageService.storeFile(file);
+    	BigInteger id = fileService.insertAndGetId(new File(null, ufr.getFileName(), ufr.getFileType(), ufr.getSize()));
+    	ufr.setId(id);
+    	return ufr;
     }
 
+    /*
+     * 파일 여러개 업로드
+     */
     @PostMapping("uploadMultipleFiles")
-    public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
-        return Arrays.asList(files)
+    public ResponseEntity<List<UploadFileResponse>> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+        return new ResponseEntity<>(
+        		Arrays.asList(files)
                 .stream()
                 .map(file -> uploadFile(file))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()), HttpStatus.CREATED);
     }
 
+    /*
+     * 파일 다운로드
+     */
     @GetMapping("downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
@@ -89,12 +94,15 @@ public class FileController {
                 .body(resource);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<CustomResponseBody> delete(@PathVariable("id") int id){
+    /*
+     * 파일 삭제
+     */
+    @DeleteMapping("files/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") BigInteger id){
+    	File file = fileService.findOne(id);
+		fileStorageService.deleteFile(file.getFileName());
 		fileService.delete(id);
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
 	}
 
 }
-*/

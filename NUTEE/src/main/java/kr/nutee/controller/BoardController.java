@@ -1,10 +1,13 @@
 package kr.nutee.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.nutee.dao.Board;
 import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
-import kr.nutee.playload.CustomResponseBody;
 import kr.nutee.service.impl.BoardServiceImpl;
 
 /*
@@ -40,9 +43,8 @@ public class BoardController {
 	 * @see /api/boards
 	 */
 	@GetMapping("")
-	public ResponseEntity<CustomResponseBody> boards(){
-		CustomResponseBody body = new CustomResponseBody(boardService.findAll(), null);
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+	public ResponseEntity<List<Board>> boards(){
+		return new ResponseEntity<>(boardService.findAll(), HttpStatus.OK);
 	}
 
 	/*
@@ -52,9 +54,8 @@ public class BoardController {
 	 * @see /api/boards/{id}
 	 */
 	@GetMapping("{id}")
-	public ResponseEntity<CustomResponseBody> board(@PathVariable("id") int id) {
-		CustomResponseBody body = new CustomResponseBody(boardService.findOne(id), null);
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+	public ResponseEntity<Board> board(@PathVariable("id") int id) {
+		return new ResponseEntity<>(boardService.findOne(id), HttpStatus.OK);
 	}
 
 	/*
@@ -64,10 +65,9 @@ public class BoardController {
 	 * @return 결과 상태 코드
 	 */
 	@PostMapping("")
-	public ResponseEntity<CustomResponseBody> insert(@Valid @RequestBody BoardInsertAndUpdateRequestDto board){
+	public ResponseEntity<String> insert(@Valid @RequestBody BoardInsertAndUpdateRequestDto board){
 		boardService.insert(board);
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.CREATED);
+		return new ResponseEntity<>("", HttpStatus.CREATED);
 	}
 
 	/*
@@ -77,10 +77,19 @@ public class BoardController {
 	 * @return 결과 상태 코드
 	 */
 	@PatchMapping("{id}")
-	public ResponseEntity<CustomResponseBody> update(@PathVariable("id") int id, @Valid @RequestBody BoardInsertAndUpdateRequestDto board){
+	public ResponseEntity<String> update(@PathVariable("id") int id, @Valid @RequestBody BoardInsertAndUpdateRequestDto board){
 		boardService.update(id, board);
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
+	}
+
+	/*
+	 * 게시판 삭제
+	 * @param 게시판 id
+	 */
+	@DeleteMapping("{id}")
+	public ResponseEntity<String> delete(@PathVariable("id") int id){
+		boardService.delete(id);
+		return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
 	}
 
 }

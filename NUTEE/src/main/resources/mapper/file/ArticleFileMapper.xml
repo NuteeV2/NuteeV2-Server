@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.nutee.repository.mapper.ArticleFileMapper">
+
+	<select id="findAllByArticleId" resultType="File">
+		SELECT f.* FROM Articlefile a
+		LEFT JOIN File f ON a.fileId = f.id
+		WHERE a.articleId=#{articleId};
+	</select>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT Articlefile(articleId, fileId)
+		VALUES(#{articleId}, #{fileId})
+	</insert>
+	
+	<delete id="deleteAll">
+		DELETE FROM Articlefile
+		WHERE articleId = #{articleId}
+	</delete>
+
+</mapper>

@@ -1,8 +1,9 @@
 package kr.nutee.dao;
 
-import lombok.EqualsAndHashCode;
+import java.math.BigInteger;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /*
@@ -11,12 +12,11 @@ import lombok.ToString;
  * @author choiyk
  */
 @Getter
-@NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class ArticleEmpathy {
 
-	private int userId;
-	private int articleId;
+	private long userId;
+	private BigInteger articleId;
 
 }

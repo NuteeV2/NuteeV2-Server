@@ -1,8 +1,7 @@
 package kr.nutee.dao;
 
-import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /*
@@ -11,9 +10,8 @@ import lombok.ToString;
  * @author choiyk
  */
 @Getter
-@NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class Role {
 
 	private int id;

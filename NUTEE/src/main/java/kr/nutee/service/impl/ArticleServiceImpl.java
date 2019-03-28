@@ -1,5 +1,6 @@
 package kr.nutee.service.impl;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import kr.nutee.model.Article.ArticleResponseDto;
 import kr.nutee.model.Article.ArticleUpdateRequestDto;
 import kr.nutee.repository.mapper.ArticleMapper;
 import kr.nutee.service.ArticleService;
-import kr.nutee.service.FileService;
 
 /*
  * Article Service 구현 클래스
@@ -24,7 +24,6 @@ import kr.nutee.service.FileService;
 public class ArticleServiceImpl implements ArticleService{
 
 	@Autowired ArticleMapper articleMapper;
-	@Autowired FileService fileService;
 
 	/*
 	 * 게시판의 전체 게시글 조회
@@ -58,7 +57,7 @@ public class ArticleServiceImpl implements ArticleService{
 	 * @return 카테고리 별 게시글
 	 */
 	@Override
-	public List<ArticleListResponseDto> findAllByUserId(int userId) {
+	public List<ArticleListResponseDto> findAllByUserId(long userId) {
 		//TODO 리팩토링 필요
 		List<Article> articles = articleMapper.findAllByUserId(userId);
 		if(articles == null) return null;
@@ -72,7 +71,7 @@ public class ArticleServiceImpl implements ArticleService{
 	 */
 	@Override
 	@Transactional
-	public ArticleResponseDto findOne(int id) {
+	public ArticleResponseDto findOne(BigInteger id) {
 		//TODO 리팩토링 필요, 없는 id error 처리
 		hit(id);
 		Article a = articleMapper.findOne(id);
@@ -85,7 +84,7 @@ public class ArticleServiceImpl implements ArticleService{
 	 */
 	@Override
 	@Transactional
-	public void hit(int id) {
+	public void hit(BigInteger id) {
 		articleMapper.hit(id);
 	}
 
@@ -94,9 +93,9 @@ public class ArticleServiceImpl implements ArticleService{
 	 * @param 게시글 제목, 내용, 작성자 id, 익명 여부, 카테고리 id, 게시판 id
 	 */
 	@Override
-	public int insert(ArticleInsertRequestDto article) {
-		Article a = articleMapper.insert(article);
-		return a.getId();
+	public BigInteger insert(ArticleInsertRequestDto article) {
+		articleMapper.insert(article);
+		return article.getId();
 	}
 
 	/*
@@ -104,7 +103,7 @@ public class ArticleServiceImpl implements ArticleService{
 	 * @param 게시글 제목, 내용, 익명 여부, 카테고리 id
 	 */
 	@Override
-	public void update(int id, ArticleUpdateRequestDto article) {
+	public void update(BigInteger id, ArticleUpdateRequestDto article) {
 		articleMapper.update(id, article);
 	}
 
@@ -113,8 +112,7 @@ public class ArticleServiceImpl implements ArticleService{
 	 * @param 게시글 id
 	 */
 	@Override
-	public void delete(int id) {
-		//TODO 댓글 함께 삭제되도록 할 것
+	public void delete(BigInteger id) {
 		articleMapper.delete(id);
 	}
 
@@ -127,7 +125,7 @@ public class ArticleServiceImpl implements ArticleService{
 		//익명으로 작성된 게시글인 경우 '스누피'
 		String nickname = article.getNickname();
 		if(article.getAnonymous().equals("Y")) nickname = "스누피";
-		ArticleResponseDto aDTO = new ArticleResponseDto(article.getId(), article.getTitle(), article.getContents(), article.getDates(), article.getUserId(), article.getCategoryId(), article.getHits(), article.getReport(), nickname, null);
+		ArticleResponseDto aDTO = new ArticleResponseDto(article.getId(), article.getTitle(), article.getContents(), article.getDates(), article.getUserId(), article.getCategoryId(), article.getHits(), article.getReport(), nickname);
 		return aDTO;
 	}
 

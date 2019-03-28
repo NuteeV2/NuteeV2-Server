@@ -12,10 +12,10 @@ import lombok.Data;
 @Data
 public class CategoryInsertRequestDto {
 
-	@NotBlank(message="CategoryName requires not blank value")
-	private String categoryName;
-
 	@NotNull(message="BoardId cannot be null")
 	private int boardId;
+
+	@NotBlank(message="CategoryName requires not blank value")
+	private String categoryName;
 
 }

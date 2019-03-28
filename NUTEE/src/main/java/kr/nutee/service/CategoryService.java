@@ -5,7 +5,6 @@ import java.util.List;
 import kr.nutee.dao.Category;
 import kr.nutee.model.Category.CategoryInsertRequestDto;
 import kr.nutee.model.Category.CategoryListResponseDto;
-import kr.nutee.model.Category.CategoryUpdateRequestDto;
 
 /*
  * Category Service Interface
@@ -24,7 +23,7 @@ public interface CategoryService {
 	void insert(CategoryInsertRequestDto category);
 
 	//카테고리 이름 변경
-	void update(int id, CategoryUpdateRequestDto category);
+	void update(int id, String category);
 
 	//카테고리 삭제
 	void delete(int id);
