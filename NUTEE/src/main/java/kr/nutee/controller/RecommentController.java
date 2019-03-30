@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.nutee.dao.Comment;
-import kr.nutee.model.CustomResponseBody;
 import kr.nutee.service.RecommentService;
 
 /**
@@ -29,44 +28,41 @@ public class RecommentController {
 	public RecommentController(RecommentService recommentService) {
 		this.recommentService = recommentService;
 	}
-	
+
 	/**
 	 * Create a recomment
-	 * 
+	 *
 	 * @param Comment contents, userId, anonymous, recommentId and articleId
-	 * @return ResponseEntity<CustomResponseBody>
+	 * @return ResponseEntity<String>
 	 */
 	@PostMapping("create")
-	public ResponseEntity<CustomResponseBody> create(@Valid final Comment recomment) {
+	public ResponseEntity<String> create(@Valid final Comment recomment) {
 		System.out.println(recomment.getRecommentId());
 		recommentService.create(recomment);
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.CREATED);
+		return new ResponseEntity<>("", HttpStatus.CREATED);
 	}
-	
+
 	/**
 	 * Update a recomment
-	 * 
+	 *
 	 * @param Comment id, contents, userId, anonymous, recommentId and articleId
-	 * @return ResponseEntity<CustomResponseBody>
+	 * @return ResponseEntity<String>
 	 */
 	@PutMapping("update")
-	public ResponseEntity<CustomResponseBody> update(@Valid final Comment recomment) {
+	public ResponseEntity<String> update(@Valid final Comment recomment) {
 		recommentService.update(recomment);
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+		return new ResponseEntity<>("", HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Patch a recomment
-	 * 
+	 *
 	 * @param id comment ID to be deleted
-	 * @return ResponseEntity<CustomResponseBody>
+	 * @return ResponseEntity<String>
 	 */
 	@PatchMapping("delete/{id}")
-	public ResponseEntity<CustomResponseBody> delete(@PathVariable("id") int id) {
+	public ResponseEntity<String> delete(@PathVariable("id") int id) {
 		recommentService.delete(id);
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+		return new ResponseEntity<>("", HttpStatus.OK);
 	}
 }

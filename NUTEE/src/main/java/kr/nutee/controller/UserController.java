@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.nutee.dao.User;
-import kr.nutee.model.CustomResponseBody;
 import kr.nutee.model.user.UserUpdateModel;
 import kr.nutee.service.UserService;
 
@@ -36,74 +35,68 @@ public class UserController {
 
 	/**
 	 * Login
-	 * 
+	 *
 	 * @param nickname
 	 * @param pw
-	 * @return ResponseEntity<CustomResponseBody>
+	 * @return ResponseEntity<String>
 	 */
 	@PostMapping("login")
-	public ResponseEntity<CustomResponseBody> login(final String nickname, final String pw) {
+	public ResponseEntity<String> login(final String nickname, final String pw) {
 		User user = userService.login(nickname, pw);
-		CustomResponseBody body = new CustomResponseBody();
 		if (user == null)
-			return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
 		else
-			return new ResponseEntity<>(body, HttpStatus.OK);
+			return new ResponseEntity<>("", HttpStatus.OK);
 	}
-	
-	
+
+
 	/**
 	 * find a user
-	 * 
+	 *
 	 * @param id user ID
-	 * @return ResponseEntity<CustomResponseBody>
+	 * @return ResponseEntity<User>
 	 */
 	@GetMapping("findOne/{id}")
-	public ResponseEntity<CustomResponseBody> findOne(@PathVariable("id") final int id) {
+	public ResponseEntity<User> findOne(@PathVariable("id") final int id) {
 		User user = userService.findOne(id);
 		if (user == null) {
-			CustomResponseBody body = new CustomResponseBody();
-			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
-		CustomResponseBody body = new CustomResponseBody(user, null);
-		return new ResponseEntity<>(body, HttpStatus.OK);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Update a user
-	 * 
+	 *
 	 * @param UserUpdateModel id, nickname, pw and email
-	 * @return ResponseEntity<CustomResponseBody>
+	 * @return ResponseEntity<String>
 	 */
 	@PutMapping("update")
-	public ResponseEntity<CustomResponseBody> update(@Valid final UserUpdateModel user) {
+	public ResponseEntity<String> update(@Valid final UserUpdateModel user) {
 		userService.update(user);
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<>(body, HttpStatus.OK);
+		return new ResponseEntity<>("", HttpStatus.OK);
 	}
 
 	/**
 	 * Patch a user
-	 * 
+	 *
 	 * @param id user ID
-	 * @return ResponseEntity<CustomResponseBody>
+	 * @return ResponseEntity<String>
 	 */
 	@PatchMapping("delete/{id}")
-	public ResponseEntity<CustomResponseBody> delete(@PathVariable("id") final int id) {
+	public ResponseEntity<String> delete(@PathVariable("id") final int id) {
 		userService.delete(id);
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<>(body, HttpStatus.OK);
+		return new ResponseEntity<>("", HttpStatus.OK);
 	}
 
 	/**
 	 * Logout
-	 * 
-	 * @return ResponseEntity<CustomResponseBody>
+	 *
+	 * @return ResponseEntity<String>
 	 */
 	@GetMapping("logout")
-	public ResponseEntity<CustomResponseBody> logout() {
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<>(body, HttpStatus.OK);
+	public ResponseEntity<String> logout() {
+		return new ResponseEntity<>("", HttpStatus.OK);
 	}
 
 }

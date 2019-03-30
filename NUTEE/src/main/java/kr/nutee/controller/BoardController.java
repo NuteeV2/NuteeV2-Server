@@ -26,7 +26,7 @@ import kr.nutee.service.impl.BoardServiceImpl;
  * @author choiyk
  */
 @RestController
-@RequestMapping("/api/boards")
+@RequestMapping("/guest/boards")
 public class BoardController {
 
 	private final BoardServiceImpl boardService;

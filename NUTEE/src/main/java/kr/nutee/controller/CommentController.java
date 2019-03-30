@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.nutee.dao.Comment;
-import kr.nutee.model.CustomResponseBody;
 import kr.nutee.service.CommentService;
 
 /**
@@ -22,50 +21,47 @@ import kr.nutee.service.CommentService;
 @RestController
 @RequestMapping("comment")
 public class CommentController {
-	
+
 	private CommentService commentService;
 
 	@Autowired
 	public CommentController(CommentService commentService) {
 		this.commentService = commentService;
 	}
-	
+
 	/**
 	 * Create a comment
-	 * 
+	 *
 	 * @param Comment contents, userId, anonymous and articleId
-	 * @return ResponseEntity<CustomResponseBody>
+	 * @return ResponseEntity<String>
 	 */
 	@PostMapping("create")
-	public ResponseEntity<CustomResponseBody> create(@Valid final Comment comment) {
+	public ResponseEntity<String> create(@Valid final Comment comment) {
 		commentService.create(comment);
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.CREATED);
+		return new ResponseEntity<>("", HttpStatus.CREATED);
 	}
-	
+
 	/**
 	 * Update a comment
-	 * 
+	 *
 	 * @param Comment id, contents, userId, anonymous and articleId
-	 * @return ResponseEntity<CustomResponseBody>
+	 * @return ResponseEntity<String>
 	 */
 	@PutMapping("update")
-	public ResponseEntity<CustomResponseBody> update(@Valid final Comment comment) {
+	public ResponseEntity<String> update(@Valid final Comment comment) {
 		commentService.update(comment);
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+		return new ResponseEntity<>("", HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Patch a comment
-	 * 
+	 *
 	 * @param id comment ID to be deleted
-	 * @return ResponseEntity<CustomResponseBody>
+	 * @return ResponseEntity<String>
 	 */
 	@PatchMapping("delete/{id}")
-	public ResponseEntity<CustomResponseBody> delete(@PathVariable("id") int id) {
+	public ResponseEntity<String> delete(@PathVariable("id") int id) {
 		commentService.delete(id);
-		CustomResponseBody body = new CustomResponseBody();
-		return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+		return new ResponseEntity<>("", HttpStatus.OK);
 	}
 }
