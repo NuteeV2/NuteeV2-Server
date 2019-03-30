@@ -2,6 +2,7 @@ package kr.nutee.model;
 
 import java.util.List;
 
+import kr.nutee.playload.CustomError;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

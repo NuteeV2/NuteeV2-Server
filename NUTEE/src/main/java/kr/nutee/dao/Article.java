@@ -1,8 +1,10 @@
 package kr.nutee.dao;
 
-import lombok.EqualsAndHashCode;
+import java.math.BigInteger;
+import java.sql.Timestamp;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /*
@@ -11,23 +13,22 @@ import lombok.ToString;
  * @author choiyk
  */
 @Getter
-@NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class Article {
 
-	private int id;
+	private BigInteger id;
 	private String title;
 	private String contents;
-	private String dates;
-	private int userId;
-	private int hits;
+	private Timestamp dates;
+	private long userId;
+	private long hits;
 	private String anonymous;
 	private int categoryId;
 	private int boardId;
 	private String deleted;
 	private int report;
 	private String nickname;
-	private int empathy;
+	private long empathy;
 
 }

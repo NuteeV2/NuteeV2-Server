@@ -13,18 +13,18 @@ import kr.nutee.model.Board.BoardInsertAndUpdateRequestDto;
 public interface BoardService {
 
 	//전체 게시판 조회
-	public abstract List<Board> findAll();
+	List<Board> findAll();
 
 	//게시판 id로 조회
-	public abstract Board findOne(int id);
+	Board findOne(int id);
 
 	//게시판 추가
-	public abstract void insert(BoardInsertAndUpdateRequestDto board);
+	void insert(BoardInsertAndUpdateRequestDto board);
 
 	//게시판 삭제
-	public abstract void delete(int id);
+	void delete(int id);
 
 	//게시판 이름 변경
-	public abstract void update(int id, BoardInsertAndUpdateRequestDto board);
+	void update(int id, BoardInsertAndUpdateRequestDto board);
 
 }

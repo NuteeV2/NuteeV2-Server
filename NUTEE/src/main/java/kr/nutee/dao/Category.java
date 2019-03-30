@@ -1,7 +1,6 @@
 package kr.nutee.dao;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -11,9 +10,8 @@ import lombok.ToString;
  * @author choiyk
  */
 @Getter
-@AllArgsConstructor	//TODO @NoArgsconstructor 로 바꿀 것
+@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class Category {
 
 	private int id;

@@ -1,23 +1,20 @@
 package kr.nutee.controller;
 
-import javax.validation.Valid;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.nutee.model.CustomResponseBody;
 import kr.nutee.model.Category.CategoryInsertRequestDto;
-import kr.nutee.model.Category.CategoryUpdateRequestDto;
+import kr.nutee.model.Category.CategoryListResponseDto;
 import kr.nutee.service.impl.CategoryServicecImpl;
 
 /*
@@ -26,11 +23,8 @@ import kr.nutee.service.impl.CategoryServicecImpl;
  * @author choiyk
  */
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api")
 public class CategoryController {
-
-	//Logging
-		private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 		private final CategoryServicecImpl categoryService;
 
@@ -44,10 +38,9 @@ public class CategoryController {
 		 * @param 게시판  id
 		 * @return ResponseEntity<CustomResponseBody>
 		 */
-		@GetMapping("{boardId}")
-		public ResponseEntity<CustomResponseBody> categories(@PathVariable("boardId") int boardId){
-			CustomResponseBody body = new CustomResponseBody(categoryService.findAllByBoardId(boardId), null);
-			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.OK);
+		@GetMapping("boards/{boardId}/categories")
+		public ResponseEntity<List<CategoryListResponseDto>> categories(@PathVariable("boardId") int boardId){
+			return new ResponseEntity<>(categoryService.findAllByBoardId(boardId), HttpStatus.OK);
 		}
 
 		/*
@@ -55,11 +48,14 @@ public class CategoryController {
 		 * @param 게시판 id, 카테고리 이름
 		 * @return ResponseEntity<CustomResponseBody>
 		 */
-		@PostMapping("")
-		public ResponseEntity<CustomResponseBody> insert(@Valid @RequestBody CategoryInsertRequestDto category){
+		@PostMapping("boards/{boardId}/categories/{categoryName:.+}")
+		public ResponseEntity<String> insert(@PathVariable("boardId") int boardId,
+				@PathVariable String categoryName){
+			CategoryInsertRequestDto category = new CategoryInsertRequestDto();
+			category.setBoardId(boardId);
+			category.setCategoryName(categoryName);
 			categoryService.insert(category);
-			CustomResponseBody body = new CustomResponseBody();
-			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.CREATED);
+			return new ResponseEntity<>("", HttpStatus.CREATED);
 		}
 
 		/*
@@ -67,11 +63,21 @@ public class CategoryController {
 		 * @param 변경할 카테고리 id, 게시판 id, 카테고리 이름
 		 * @return ResponseEntity<CustomResponseBody>
 		 */
-		@PatchMapping("{id}")
-		public ResponseEntity<CustomResponseBody> update(@PathVariable("id") int id, @Valid @RequestBody CategoryUpdateRequestDto category){
-			categoryService.update(id, category);
-			CustomResponseBody body = new CustomResponseBody();
-			return new ResponseEntity<CustomResponseBody>(body, HttpStatus.NO_CONTENT);
+		@PatchMapping("categories/{id}/{categoryName:.+}")
+		public ResponseEntity<String> update(@PathVariable("id") int id,
+				@PathVariable String categoryName){
+			categoryService.update(id, categoryName);
+			return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
+		}
+
+		/*
+		 * 카테고리 삭제
+		 * @param 카테고리 id
+		 */
+		@DeleteMapping("categories/{id}")
+		public ResponseEntity<String> delete(@PathVariable("id") int id){
+			categoryService.delete(id);
+			return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
 		}
 
 }

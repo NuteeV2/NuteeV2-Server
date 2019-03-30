@@ -65,8 +65,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void delete(int id) {
-		// TODO delete 메소드 작성해야 함..
-
+		boardMapper.delete(id);
 	}
 
 }
